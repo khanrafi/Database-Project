@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>DBMS group-7</title>]
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="/design/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/design/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+	<link rel="stylesheet" href="/design/query.css">
+	<style media="screen">
+	.viewer_btn{
+		background-color: #01579B;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.dev_btn{
+		background-color: #EEFF41;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.admin_btn{
+		background-color: #D84315;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.user_name{
+          color: #ffffff;
+				}
+	.display-3{
+		background-color: aqua;
+		border-radius: 20%;
+		box-shadow: 3px 8px #01579B
+	}
+	.rowInput{
+		flex-basis: 20px;
+		flex-grow: 0;
+		flex-shrink: 1;
+	}
+
+	.start{
+		flex-basis: 200px;
+	}
+
+	.end{
+		flex-basis: 200px;
+	}
+	#no-one{
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<% console.log("value = " + value); %>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-default fixed-top">
+		<% if (btn==2)  { %>
+      <a class="navbar-brand dev_btn" href=<%=link%>>DBMS</a> <span class="user_name"><%= user %></span>
+    <%}  else if (btn==3)  { %>
+      <a class="navbar-brand admin_btn" href=<%=link%>>DBMS</a> <span class="user_name"><%= user %></span>
+    <% } else{ %>
+        <a class="navbar-brand viewer_btn" href=<%=link%>>DBMS</a> <span class="user_name"><%= user %></span>
+      <%}%>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto"></ul>
+			<ul class="navbar-nav navbar-left">
+          <div class="btn-group">
+        <li class="nav-item ">
+            <button type="button" class="btn btn-dark btn-outline-primary btn-sm mycss dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href=<%=link + "profile"%>>Login as mother</a>
+              <a class="dropdown-item" href="#login-child">Login for child</a>
+          </div>
+      </li>
+      <li class="nav-item ">
+
+        <button type="button" class="btn btn-dark btn-outline-warning btn-sm mycss dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Worker
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#health-volunteer">Health Volunteer</a>
+          <a class="dropdown-item" href=<%=link + "login-developer" %>>Employee</a>
+      </div>
+      </li>
+				<li class="nav-item">
+					<a role="button" class="btn btn-dark btn-outline-danger btn-sm mycss" href=<%=link + "login-admin" %>>Admin</a>
+				</li>
+        <li class="nav-item">
+          <a role="button" class="btn btn-dark btn-outline-success btn-sm mycss" href=<%=link + "register"%>>Register</a>
+        </li>
+        <li class="nav-item">
+          <a role="button" class="btn btn-dark btn-outline-secondary btn-sm mycss" href=<%=link + "home"%>>Logout</a>
+        </li>
+			</ul>
+		</div>
+  </div>
+	</nav>
+	<br>
+
+	<div class="container ">
+		<h1 class="display-3"><%= tn %> RECORD</h1>
+	</div>
+
+	<% console.log("attribute_in_query.ejs = " + attribute); %>
+	<form action="<%= "/query/" + tn %>" method="POST">
+	<div class="container jumbotron d-flex flex-column justify-content-around">
+		<% for(var i = 0; i < len; i++){ %>
+		<div class="container row">
+			<div class="container col-3">
+				<input class="form-check-input" type="checkbox" id=<%=attribute[i][0]%> checked onclick="check('<%=attribute[i][0]%>')">
+				<label class="form-check-label" for=<%=attribute[i][0]%>> <%=attribute[i][0]%> </label>
+			</div>
+
+
+			<div class="container col-8 d-flex justify-content-between">
+				<% if(attribute[i][1] == "VARCHAR2") { %>
+				<input type="text" class="form-control" id=<%= "input_"+attribute[i][0] %> name=<%= attribute[i][0] %>
+					placeholder="Enter string to search">
+				<% } else if(attribute[i][1] == "NUMBER" || attribute[i][1] == "INT") { %>
+				<input type="number" class="form-control" id=<%= "input_lower_"+attribute[i][0] %> name=<%= attribute[i][0] %>
+					placeholder="Enter lower limit">
+				<input type="number" class="form-control" id=<%= "input_upper_"+attribute[i][0] %> name=<%= attribute[i][0] %>
+										placeholder=" Enter upper limit">
+				<% } else if(attribute[i][1] == "DATE") { %>
+				<input type="date" class="form-control" id=<%= "input_lower_"+attribute[i][0] %> name=<%= attribute[i][0] %>
+									placeholder=" Enter lower limit">
+				<input type="date" class="form-control" id=<%= "input_upper_"+attribute[i][0] %> name=<%= attribute[i][0] %>
+									placeholder=" Enter upper limit">
+				<% } %>
+			</div>
+		</div>
+		<% } %>
+
+		<button type="submit" class="btn btn-primary submit align-self-end mt-5">Submit</button>
+	</div>
+	</form>
+
+	<div class="table-responsive-xl table_container1">
+		<table class="table table-hover table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<% for(var i = 0; i < len ; i++){ %>
+					<th class=<%="td_"+attribute[i][0] %> scope="col"> <%= attribute[i][0] %> </th>
+					<% } %>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var i=0 ; i<MX ; i++) { %>
+				<tr>
+					<% for (var j = 0; j < len; j++) { %>
+					<td class=<%="td_"+attribute[j][0] %>> <%= value[i][j] %> </td>
+					<% } %>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
+
+
+
+	<script src="/design/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="/design/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="/design/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="/design/query.js"></script>
+</body>
+</html>
