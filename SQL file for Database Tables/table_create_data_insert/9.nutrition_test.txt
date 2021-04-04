@@ -1,0 +1,41 @@
+create table nutrition_test
+(
+patient_id              varchar2(35),
+date_of_visit          date,
+riboflavin              number(5,2),
+folate                  number(5,2),
+iron                    number(5,2),
+protein                 number(5,2),
+calcium                 number(5,2),
+vitaminA                int,
+vitaminb6               int,
+thiamin                 number(5,2),
+
+
+
+constraint nutrition_test_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT nutrition_test_ck CHECK
+( riboflavin >=0.00 and folate >=0.00 and iron>=0.00 and protein >=0.00 
+and calcium >=0.00  and vitaminA >=0 and vitaminb6>=0 and thiamin >=0.00 
+)                 
+
+
+);
+
+--multival table of during_pregnancy_report
+
+insert into nutrition_test values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),6.7,13.4,7.1,8.9,17.1,7,4,4.9);
+insert into nutrition_test values('PP002',to_date('12-Dec-2012','DD-MON-YYYY'),6.5,13.8,6.1,8.9,17.3,7,4,4.7);
+insert into nutrition_test values('PP003',to_date('01-Jan-2011','DD-MON-YYYY'),12.4,10.1,6.5,10.4,5.8,4,6,4.1);
+insert into nutrition_test values('PP004',to_date('13-May-2013','DD-MON-YYYY'),8.4,15.4,4.6,10.1,20,26,3,5.1);
+
+
+--riboflavin ug/dL
+--iron g/dL
+--protein g/dL
+--calcium mg/dL
+--vitaminA mcg/dL
+--vitaminA ug/L
+--thiamin ug/dL
+--u=micro

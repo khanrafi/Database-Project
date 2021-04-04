@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>DBMS group-7</title>]
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="/design/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/design/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+	<link rel="stylesheet" href="/design/get.css">
+	<style media="screen">
+	
+	</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-default fixed-top">
+		<% if (btn==2)  { %>
+      <a class="navbar-brand dev_btn" href=<%=link%>>DBMS</a>
+    <%}  else if (btn==3)  { %>
+      <a class="navbar-brand admin_btn" href=<%=link%>>DBMS</a>
+    <% } else{ %>
+        <a class="navbar-brand viewer_btn" href=<%=link%>>DBMS</a>
+      <%}%>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto"></ul>
+			<ul class="navbar-nav navbar-left">
+				<li class="nav-item ">
+					<a role="button" class="btn btn-dark btn-outline-primary btn-sm mycss" href=<%= link + "query" %> >Viewer</a>
+				</li>
+				<li class="nav-item ">
+					<a role="button" class="btn btn-dark btn-outline-warning btn-sm mycss" href=<%=link + "get" %>>Developer</a>
+				</li>
+				<li class="nav-item">
+					<a role="button" class="btn btn-dark btn-outline-danger btn-sm mycss" href=<%=link + "login-admin" %>>Admin</a>
+				</li>
+				<li class="nav-item">
+					<a role="button" class="btn btn-dark btn-outline-success btn-sm mycss" href=<%=link + "register"%>>Register</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<br>
+
+	<div class="container ">
+		<h1 class="display-3">Basic informations of a person</h1>
+	</div>
+
+	<% if(flag) { %>
+
+	<% console.log("column = " + column); %>
+	<form action="/post" method="POST">
+		<div class="container d-flex justify-content-around contenting">
+			<div class="container jumbotron item mr-2">
+				<% for(var i = 0; i < column.length/2; i++) { %>
+				<div class="form-group">
+						<label for= <%= column[i] %> ><%= column[i] %> </label>
+						<input type="text" class="form-control" id=<%= column[i] %> name=<%= column[i] %> placeholder=<%= "Enter " + column[i] %>>
+					</div>
+					<% } %>
+			</div>
+
+			<div class="container jumbotron item ml-2">
+				<% for(var i = column.length/2; i < column.length; i++) { %>
+				<div class="form-group">
+						<label for= <%= column[i] %> ><%= column[i] %> </label>
+						<input type="text" class="form-control" id=<%= column[i] %> name=<%= column[i] %> placeholder=<%= "Enter " + column[i] %>>
+					</div>
+					<% } %>
+			</div>
+		</div>
+		<div class="container d-flex justify-content-center">
+			<button type="submit" class="btn btn-primary submit">Submit</button>
+			<br><br><br>
+		</div>
+	</form>
+
+
+	<% } else{ %>
+	<div class="jumbotron container">
+		<h1 class="display-1" id="ok">Data inserted succesfully</h1>
+		<a href=<%=link%> id="okButton" class="btn btn btn-dark btn-outline-info btn-sm align-middle">Home Page</a>
+		<% } %>
+	</div>
+
+	<script src="/design/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="/design/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="/design/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="/design/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

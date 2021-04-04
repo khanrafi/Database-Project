@@ -1,0 +1,26 @@
+create table vaccine
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+provider_name     varchar2(40),
+provider_address  varchar2(40),
+
+vaccine_name        varchar2(15),
+total_dose          int,
+prevented_disease   varchar2(20),
+success_rate        number(5,2),
+side_effects        varchar2(200),
+injection_method    varchar2(20),  
+
+constraint vaccine_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade,
+constraint vaccine_pk primary key(supply_id)
+
+);
+insert into  vaccine values('S010',2300000,'welfare','Jamalpur-city-bank','Jamalpur-city-bank',1200000,'Antar Welfare Foundation','Banani Dhaka','pneumovax',4,'pneumonia',90,'NONE','Direct-inject');
+insert into  vaccine values('S011',3300000,'welfare','Shyllet-city-bank','Shyllet-city-bank',2100000,'Care Bangladesh','Uttara Dhaka','Retrovirus',24,'RTV',90,'NONE','Direct-inject');
+insert into  vaccine values('S012',1100000,'Safety','DHAKA-TRUST-bank','DHAKA-city-bank',2100000,'Bangladesh Child Welfare Society','Savar Dhaka','DTAP',2,'Diptheria',92,'NONE','Direct-inject');

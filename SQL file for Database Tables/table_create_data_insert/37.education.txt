@@ -1,0 +1,24 @@
+create table Education
+(
+education_id          varchar2(20),
+institution_name      varchar2(30),
+institution_location  varchar2(15),
+yearly_educational_expenses   int,
+attendance_rate       number(4,2),
+
+person_id      varchar2(35),
+
+constraint education_fk foreign key(person_id) references child(person_id) on delete cascade,
+constraint education_uk unique(person_id),
+
+constraint education_pk primary key(education_id)
+);
+
+insert into Education values('E001','Asuganj Prathomi Biddaloy','Asuganj',30000,80,'P5001');
+insert into Education values('E002','Dhanmondi High School','Dhanmondi',15000,70,'P5006');
+insert into Education values('E003','Ideal School','Mothijhil',10000,90,'P5009');
+insert into Education values('E004','Addorso Biddaloy','Maniknogor',30000,80,'P50010');
+insert into Education values('E005','Ahmed Bawany','Manikganj',20000,60,'P50013');
+
+
+--has multival table result

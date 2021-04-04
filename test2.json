@@ -1,0 +1,15 @@
+{
+  "week_number": "15",
+  "utc_offset": "+06:00",
+  "unixtime": "1555086828",
+  "timezone": "Asia/Dhaka",
+  "dst_until": null,
+  "dst_from": null,
+  "dst": false,
+  "day_of_year": 102,
+  "day_of_week": 5,
+  "datetime": "2019-04-12T22:33:48.823214+06:00",
+  "abbreviation": "+06"
+}
+
+$.datetime[0]

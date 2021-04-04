@@ -1,0 +1,25 @@
+create table educational_support
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+record_no       varchar2(15),
+book_name       varchar2(15),
+book_type     varchar2(15),
+other_material_name  varchar2(150),
+
+constraint educational_support_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade,
+constraint educational_support_pk primary key(supply_id),
+CONSTRAINT supply_and_logistics_ck CHECK(budget  >=0)
+);
+
+insert into educational_support values('S01',100000,'Ensure Education','district-outskirts','district board office',150000,'r01','Math-primary','Math','Geometric-Instruments');
+insert into educational_support values('S02',150000,'Ensure Education','district-bank','district-bank',149000,'r02','bangla-primary','bangla','');
+insert into educational_support values('S03',1440000,'Ensure Education','district-board','district-bank',1323000,'r04','ICT-primary','primary','computers');
+
+
+

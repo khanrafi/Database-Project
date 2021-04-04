@@ -1,0 +1,20 @@
+create table child_accidents
+(
+person_id      varchar2(35),
+case_id   varchar(20),
+
+constraint child_accidents_fk100 foreign key(person_id) references child(person_id) on delete cascade,
+constraint child_accidents_fk10 foreign key(case_id) references unexpected_event(case_id) on delete cascade
+
+
+);
+insert into child_accidents values('P5001','C01');
+insert into child_accidents values('P5006','C02');
+insert into child_accidents values('P5009','C02');
+insert into child_accidents values('P5009','C03');
+insert into child_accidents values('P50010','C04');
+
+
+
+
+--relation between child and unexpected_event

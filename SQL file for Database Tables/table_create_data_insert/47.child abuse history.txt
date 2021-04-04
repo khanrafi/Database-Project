@@ -1,0 +1,16 @@
+create table child_abuse_history
+(
+case_id                     varchar2(20),
+
+victims_report                varchar2(100),
+abuse_type                    varchar2(15),
+relationship_with_aggressor   varchar2(15),
+cause                         varchar2(150),
+
+constraint child_abuse_history_fk foreign key(case_id) references unexpected_event(case_id) on delete cascade,
+constraint child_abuse_history_pk primary key(case_id)
+); 
+insert into child_abuse_history values('C01','injured','physical','father-son','aggression');
+insert into child_abuse_history values('C02','suicide','mental','husband-wife','rage');
+insert into child_abuse_history values('C03','death','mental-physical','husband-wife','dowry');
+--has multival table abuse_effect

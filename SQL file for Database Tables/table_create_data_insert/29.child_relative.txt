@@ -1,0 +1,17 @@
+create table child_relative
+(
+person_id      varchar2(35),
+
+relative_name  varchar2(15),
+relation       varchar2(15),
+
+constraint child_relative_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+insert into child_relative values('P5009','Karimullah','Uncle');
+insert into child_relative values('P50010','Rashedul Islam','Uncle');
+insert into child_relative values('P50012','Rabaya Akhter','Aunt');
+insert into child_relative values('P50013','Rahima Akter','Grandmother');
+
+
+--multival of child

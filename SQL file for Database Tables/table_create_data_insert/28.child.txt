@@ -1,0 +1,21 @@
+create table Child
+(
+person_id      varchar2(35),
+
+father_id      varchar2(35),
+mother_id      varchar2(35),
+
+constraint child_fk foreign key(person_id) references person(person_id) on delete cascade,
+constraint child_pk primary key(person_id) 
+);
+
+
+
+insert into child values('P5001','P5002','P5004');
+insert into child values('P5006','P5002','P5004');
+insert into child values('P5009','P5003','P5007');
+insert into child values('P50010','P50011','P5008');
+insert into child values('P50012','','P5008');
+insert into child values('P50013','','');
+
+

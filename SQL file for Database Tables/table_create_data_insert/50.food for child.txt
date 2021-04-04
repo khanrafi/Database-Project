@@ -1,0 +1,27 @@
+create table food
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+provider_name     varchar2(40),
+provider_address  varchar2(40),
+
+preserved_amount    int,
+food_name           varchar2(15),
+food_type            varchar2(15),
+total_calorie       int,
+
+constraint food_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade,
+constraint food_pk primary key(supply_id)
+
+);
+
+insert into food values('S04',200000,'welfare','rajsahi-city-bank','rajsahi-city-board',150000,'Al-Falah-Bangladesh','Iqbal Road Dhaka',500000,'rice','carbohidrade',300);
+insert into food values('S05',200000,'welfare','chittagong-city-bank','chittagong-city-board',50000,'Wave Foundation','Badda Dhaka',150000,'rice','carbohidrade',300);
+insert into food values('S06',2200000,'welfare','Dhaka-city-bank','Dhaka-city-bank',1300000,'Sunlife Foundation','Azimpur Dhaka',70000,'fruits','vitamins',600);
+
+--weak entity

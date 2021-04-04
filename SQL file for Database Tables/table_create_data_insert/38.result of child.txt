@@ -1,0 +1,16 @@
+create table result_of_child
+(
+class          int,
+result         varchar2(10),
+
+education_id   varchar2(20),
+
+constraint result_of_child_fk foreign key(education_id) references education(education_id)on delete cascade
+);
+
+insert into result_of_child values(2,'B+','E001');
+insert into result_of_child values(4,'F','E002');
+insert into result_of_child values(6,'D','E003');
+insert into result_of_child values(1,'C','E004');
+
+--multival of education

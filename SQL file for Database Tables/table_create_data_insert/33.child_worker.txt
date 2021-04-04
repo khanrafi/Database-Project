@@ -1,0 +1,19 @@
+create table child_worker
+(
+person_id      varchar2(35),
+
+cause                  varchar2(50),
+total_monthly_income   int,
+working_area           varchar2(50),
+daily_work_hour        int,
+working_type           varchar2(30),
+
+constraint child_worker_pk primary key(person_id),
+constraint child_worker_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+insert into child_worker values('P5001','Poverty',2500,'Mirpur',10,'Domestic work');
+insert into child_worker values('P5006','Poverty',3500,'Mirpur',8,'Electrician');
+insert into child_worker values('P50012','Poverty',2000,'Kochukhet',9,'Agriculture');
+insert into child_worker values('P50013','Poverty',1500,'Kurigram',9,'Agriculture');
+--has multival table accidents_in_workplace

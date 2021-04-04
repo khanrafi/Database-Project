@@ -1,0 +1,23 @@
+create table supply_and_logistics
+(
+supply_id          varchar2(20),
+  
+constraint  supply_and_logistics_pk primary key(supply_id)
+
+);
+
+insert into supply_and_logistics values('S01');
+insert into supply_and_logistics values('S02');
+insert into supply_and_logistics values('S03');
+insert into supply_and_logistics values('S04');
+insert into supply_and_logistics values('S05');
+insert into supply_and_logistics values('S06');
+insert into supply_and_logistics values('S07');
+insert into supply_and_logistics values('S08');
+insert into supply_and_logistics values('S09');
+insert into supply_and_logistics values('S010');
+insert into supply_and_logistics values('S011');
+insert into supply_and_logistics values('S012');
+insert into supply_and_logistics values('S013');
+insert into supply_and_logistics values('S014');
+insert into supply_and_logistics values('S015');

@@ -1,0 +1,19 @@
+create table mobile_no
+(
+person_id varchar2(35),
+mobile_no varchar2(15),
+
+constraint mobile_no_fk foreign key(person_id) references person(person_id) on delete cascade
+);
+
+--multival table of person
+
+
+insert into mobile_no values('P5001','016178141428');
+insert into mobile_no values('P5002','017179991920');
+insert into mobile_no values('P5002','019187731010');
+insert into mobile_no values('P5003','018148171435');
+insert into mobile_no values('P5004','015104705095');
+insert into mobile_no values('P5005','017144775535');
+insert into mobile_no values('P5006','018142761536');
+

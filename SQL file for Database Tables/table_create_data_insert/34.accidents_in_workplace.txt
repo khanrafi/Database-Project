@@ -1,0 +1,15 @@
+create table accidents_in_workplace
+(
+person_id                       varchar2(35),
+accident_name                   varchar2(30),
+outcome                         varchar2(30),
+compensation_from_employeer     int,
+
+
+constraint accidents_in_workplace_fk foreign key(person_id) references child_worker(person_id) on delete cascade
+);
+
+insert into accidents_in_workplace values('P5001','Electric Shock','Death',200000);
+insert into accidents_in_workplace values('P50012','Falling From Roof','Breaking Leg',1000);
+
+--multival of table child_worker

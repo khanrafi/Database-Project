@@ -1,0 +1,16 @@
+create table hygiene_equipment
+(
+supply_id          varchar2(20),
+equipment_name          varchar2(15),
+equipment_supplied     int,
+
+constraint hygiene_equipment_fk foreign key(supply_id)references water_sanitation(supply_id)on delete cascade
+);
+
+
+
+insert into  hygiene_equipment values('S013','MASK',20000);
+insert into  hygiene_equipment values('S014','Brooms',10000);
+
+
+--multival of water_sanitation

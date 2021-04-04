@@ -1,0 +1,21 @@
+create table Health_record
+(
+
+health_record_id   varchar2(15),
+person_id      varchar2(35),
+
+constraint health_record_fk foreign key(person_id) references child(person_id) on delete cascade,
+constraint health_record_uk unique(person_id),
+
+constraint health_record_pk primary key(health_record_id)
+);
+
+insert into health_record values('H01','P5001');
+insert into health_record values('H02','P5006');
+insert into health_record values('H03','P5009');
+insert into health_record values('H04','P50010');
+insert into health_record values('H05','P50012');
+insert into health_record values('H06','P50013');
+
+
+--multival growth_rate

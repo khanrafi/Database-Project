@@ -1,0 +1,17 @@
+create table abuse_effect
+(
+case_id            varchar2(15),
+emotional_effect     varchar2(50),
+physical_effect      varchar2(50),
+treatment            varchar2(15),
+
+
+constraint abuse_effect_fk foreign key(case_id) references child_abuse_history(case_id) on delete cascade
+);
+
+
+insert into abuse_effect values('C01','heavy','light','consoling');
+insert into abuse_effect values('C02','heavy','heavy','hospitalization');
+insert into abuse_effect values('C03','light','heavy','rehab');
+
+--multival of table child_abuse_history

@@ -1,0 +1,13 @@
+create table addicted_child
+(
+person_id      varchar2(35),
+
+constraint addicted_child_pk primary key(person_id),
+constraint addicted_child_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+
+insert into addicted_child values('P5006');
+insert into addicted_child values('P50010');
+
+--has multival table addiction

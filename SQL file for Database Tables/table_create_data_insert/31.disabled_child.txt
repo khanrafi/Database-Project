@@ -1,0 +1,16 @@
+create table disabled_child
+(
+person_id      varchar2(35),
+
+disease_type    varchar2(25),
+disability_or_disorder_name   varchar2(35),
+age_of_detection    varchar2(15),
+cause                varchar2(35),
+
+constraint disabled_child_pk primary key(person_id) ,
+constraint disabled_child_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+insert into disabled_child values('P5001','Vision Impairment','Blindless',3,'Macular degeneration');
+insert into disabled_child values('P5009','Mental Disability','Autism Spectrum Disorder',5,'Prenatal Viral Infection');
+insert into disabled_child values('P50010','Vision Impairment','Physical Disability',1,'Abnormal Development of the Brain');

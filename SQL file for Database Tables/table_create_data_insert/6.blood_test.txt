@@ -1,0 +1,55 @@
+create table blood_test
+(
+patient_id         varchar2(35),
+date_of_visit      date,
+
+rbc_count          number(6,2),
+platelet_count     number(16,2),
+blood_sugar_level  number(6,2),
+hdl_cholesterol    number(8,2),
+ldl_cholesterol    number(8,2),
+blood_urea         number(8,2),
+hemoglobin         number(8,2),
+blood_pressure     number(8,2),
+wbc_count          number(8,2),
+
+
+
+constraint blood_test_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT blood_test_ck CHECK(rbc_count >=0.00 and platelet_count>=0.00 and blood_sugar_level>=0.00 and hdl_cholesterol >=0.00
+ and ldl_cholesterol >=0.00 and blood_urea >=0.00 and hemoglobin>=0.00 and blood_pressure>=0.00 and wbc_count >=0.00  )
+
+);
+
+
+insert into  blood_test values('PP001',to_date('09-Feb-2010','DD-MON-YYYY'),4.6,200000,110,59,100,8,10,125,5500);
+insert into  blood_test values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),4.6,200000,130,69,105,8,13,120,5400);
+
+insert into  blood_test values('PP002',to_date('12-Dec-2012','DD-MON-YYYY'),5.1,350000,85,43,96,12,11,120,6000);
+insert into  blood_test values('PP002',to_date('15-Dec-2012','DD-MON-YYYY'),5.4,350000,80,47,116,12,17,115,6000);
+
+insert into blood_test values('PP003',to_date('03-Dec-2010','DD-MON-YYYY'),5.0,180000,90,60,111,14,10.5,130,7500);
+insert into blood_test values('PP003',to_date('01-Jan-2011','DD-MON-YYYY'),5.0,180000,94,55,119,14,12.5,138,7500);
+
+insert into  blood_test values('PP004',to_date('13-May-2013','DD-MON-YYYY'),4.9,210000,96,43,110,16,11.5,110,10000);
+insert into  blood_test values('PP004',to_date('17-May-2013','DD-MON-YYYY'),4.9,210000,95,47,130,16,11.0,140,10000);
+
+--multivalued of table during_pregnancy_report
+
+
+
+
+
+
+
+P500125
+
+
+
+
+
+insert into person values('P50025','Rina','02-01-2009','rina@gmail.com','Banglaeshi','B+','Islam','female','Dhaka','1400','Suvas-lane','14b');
+insert into mothers_pregnancy_info values('P50025','3','3','12-03-2010','CMH');
+insert into during_pregnancy_report values('P50025',to_date('20-May-2019','DD-MON-YYYY'),'PP0046');
+insert into  blood_test values('PP0046',to_date('20-May-2019','DD-MON-YYYY'),4.9,210000,95,47,130,16,11.0,140,10000);

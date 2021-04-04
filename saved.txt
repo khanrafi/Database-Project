@@ -1,0 +1,162 @@
+var express = require("express");
+var app = express();
+var ejs = require("ejs");
+var bodyParser = require("body-parser");
+var oracledb = require('oracledb');
+
+var username = "tasfik";
+var pass = "root";
+var binds;
+var host = "127.0.0.1";
+var port = 9000;
+var link = "http://127.0.0.1:9000/"
+var testa=10;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/design')); //this add the folder for css file
+app.set("view engine", "ejs");//for this line, file type is not needed in render()
+
+app.get("/", function (req, res) {
+	var attribute = ["name", "ID"];
+	// var value = [
+	// 	['rifat', '29']
+	// 	['tasfik', '39']
+	// ];
+
+	var value = [
+		{name: "rifat", ID: "29"},
+		{name: "tasfik", ID: "39"}
+	];
+
+
+
+	// res.send("hello there");
+	res.render('home', {
+		link: link
+	});
+});
+
+app.get("/get", function (req, res) {
+	// res.send("hello there");
+testa=15;
+	res.render('get', {
+		flag:true,
+		link: link
+	});
+});
+
+app.get("/query", function (req, res) {
+	oracledb.getConnection({
+			user: username,
+			password: pass,
+			connectString: "(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))(CONNECT_DATA =(SID= xe)))"
+		},
+		function (err, connection) {
+			if (err) {
+				console.error("error in submitted: " + err.message);
+				return;
+			}
+			
+			var colsShowed=["name","ID","city"];
+			var sqlQuery = "select * from person";
+			var colQuery = "SELECT column_name FROM all_tab_cols WHERE table_name = 'PERSON'";
+			
+			console.log("oracle entered");
+
+			connection.execute(sqlQuery, function (err, result) {
+				if (err) {
+					console.log(err);
+					return;
+				} else {
+					console.log("no error in query");
+				}
+
+				console.log(result.rows);
+	console.log("testing purposes->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       "+testa);
+
+				var attribute = ["name", "ID", "Nationality", "Religion", "Gender", "Email_address", "mobile", "Birth_Date", "city", "Street", "Zip_code", "Height", "Weight"];
+				
+				var MX = result.rows.length;
+				var len = attribute.length;
+
+				res.render('query', {
+					attribute: attribute,
+					value: result.rows,
+					link: link,
+					MX: MX,
+					len: len
+				});
+			});
+		}
+	);
+
+
+
+});
+
+app.post("/post", function (req, res) {
+	console.log(req.body);
+
+	oracledb.getConnection({
+			user: username,
+			password: pass,
+			connectString: "(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))(CONNECT_DATA =(SID= xe)))"
+		},
+		function (err, connection) {
+			if (err) {
+				console.error("error in submitted: " + err.message);
+				return;
+			}
+
+			var sqlQuery = 'INSERT INTO person VALUES (:t1,:t2,:t3,:t4,:t5,:t6,:t7,:t8,:t9,:t10,:t11,:t12,:t13)';
+			binds = [{
+				t1: req.body.Name,
+				t2: req.body.ID,
+				t3: req.body.Nationality,
+				t4: req.body.Religion,
+				t5: req.body.Gender,
+				t6: req.body.Email,
+				t7: req.body.Mobile,
+				t8: req.body.Date,
+				t9: req.body.City,
+				t10: req.body.Street,
+				t11: req.body.ZipCode,
+				t12: req.body.Height,
+				t13: req.body.Weight
+			}];
+			console.log("oracle entered bind=" + binds[0]);
+			console.log("binds = " + binds);
+			console.log("\n t1=" + binds[0].t1 + "\n t2=" + binds[0].t2 + "\n t3=" + binds[0].t3 + "\n t4=" + binds[0].t4 + "\n t5=" + binds[0].t5 + "\n t6=" + binds[0].t6 + "\n t7=" + binds[0].t7 + "\n t8=" + binds[0].t8 + "\n t9=" + binds[0].t9 + "\n t10=" + binds[0].t10 + "\n t11=" + binds[0].t11 + "\n t13=" + binds[0].t13);
+
+			connection.execute(sqlQuery, binds[0], {
+				autoCommit: true
+			}, function (err, result) {
+				if (err) {
+					console.log(err);
+					return;
+				} else{
+					console.log('Rows inserted: ' + result.rowsAffected);
+					return;
+				}
+			});
+		}
+	);
+
+	res.render('get', {
+		flag: false,
+		link: link
+	});
+});
+
+app.get("/*", function (req, res) {
+	//gets everything if above get function are not used
+	res.send("Eror 404 : not found");
+});
+
+app.listen(port, host, function (err) {
+
+	if (err)
+		console.log("error happend");
+
+	console.log("server has started on link : " + link);
+});

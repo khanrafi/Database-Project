@@ -1,0 +1,23 @@
+create table medical_equipment
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+equipment_no                varchar2(15),
+
+equipment_name              varchar2(20),
+provider_name     varchar2(40), 
+provider_address  varchar2(40),
+delivary_date	            date,						
+
+constraint medical_equipment_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade,
+constraint medical_equipment_pk primary key(supply_id)
+);
+
+insert into medical_equipment values('S07',2300000,'welfare','Rajsahi-city-bank','Rajsahi-city-bank',3200000,'E01','Xray machine','Domain inc','Dhaka-1201',to_date('12-02-2011','DD-MM-YYYY'));
+insert into medical_equipment values('S08',2200000,'development','moimonsingh-city-bank','moimonsingh-city-bank',2200000,'E02','MRI machine','Worlz inc','Dhaka-gulsan-301',to_date('2-03-2013','DD-MM-YYYY'));
+insert into medical_equipment values('S09',3200000,'development','jamalpur-city-board','lamalpur-city-bank',2300000,'E03','Heart rate analyzer','Medico inc','Dhaka-dhanmondi-201',to_date('2-03-2014','DD-MM-YYYY'));

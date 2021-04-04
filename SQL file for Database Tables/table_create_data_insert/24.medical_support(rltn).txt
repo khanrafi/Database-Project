@@ -1,0 +1,20 @@
+create table medical_support
+(
+disease_id   varchar2(15),
+service_id   varchar2(20),
+
+constraint medical_support_fk1 foreign key(service_id) references emergency_medical_support(service_id) on delete cascade,
+constraint medical_support_fk2 foreign key(disease_id) references disease(disease_id) on delete cascade
+
+);
+
+insert into medical_support values('D001','SI001');
+insert into medical_support values('D002','SI001');
+insert into medical_support values('D002','SI002');
+insert into medical_support values('D003','SI003');
+insert into medical_support values('D004','SI004');
+insert into medical_support values('D005','SI005');
+insert into medical_support values('D006','SI005');
+insert into medical_support values('D006','SI006');
+
+--relation between disease and emergency_medical_support

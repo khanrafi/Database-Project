@@ -1,0 +1,21 @@
+create table medicine
+(
+person_id             varchar2(35),
+prescribed_medicine   varchar2(20),
+daily_dose            int,
+illness_curing        varchar2(50),
+
+
+constraint medicine_fk foreign key(person_id) references mothers_pregnancy_info(person_id) on delete cascade,
+CONSTRAINT medicine_ck CHECK(daily_dose>=0)
+
+);
+
+--multival mothers_pregnancy_info
+
+insert into medicine values('P5004','Aspirin',2,'Angina');
+insert into medicine values('P5005','Thiazide diuretics',1,'High Blood Pressure');
+insert into medicine values('P5007','Acarbose ',1,'Diabates');
+insert into medicine values('P5004','Fexofenadine',2,'Allergy');
+insert into medicine values('P5005','Retinoid',2,'Acne');
+insert into medicine values('P5008','Aspirin',2,'Headache');

@@ -1,0 +1,27 @@
+create table disease
+(
+disease_id   varchar2(15),
+
+disease_name   varchar2(25),
+disease_type   varchar2(25),
+cause          varchar2(100),
+symptom        varchar2(100),
+disease_duration       int,    
+disablity_disorder_name  varchar2(35),
+age_of_detection         int,
+treatment_taken          varchar2(155),   
+
+
+constraint disease_pk primary key(disease_id),
+
+CONSTRAINT disease_ck CHECK(disease_duration >=0 and
+age_of_detection>=0
+)
+);
+
+insert into disease values('D001','Mumps','Infectious disease','Infection','Discomfort in the salivary glands',4,'',37,'Ibuprofen Medicine');
+insert into disease values('D002','Hay Fever','Allergy','Allergen','Sneezing',3,'',28,'Nasal corticosteroids');
+insert into disease values('D003','Angina Pectoris','Heart Disease','Allergen','Heart Pain',15,'',28,'Nitroglycerin');
+insert into disease values('D004','Cirrhosis','Liver Disease','Drug','Abdominal pain',28,'Encopresis',39,'Niacin');
+insert into disease values('D005','Post traumatic stress','Mental Imbalance','Pregnancy After-effect','Intense feelings of distress',1,'Autism spectrum disorder',39,'Antidepressant');
+insert into disease values('D006','Postpartum Infections','Infectious disease','Pregnancy After-effect','Blood clots',1,'',29,'Cephalexin');

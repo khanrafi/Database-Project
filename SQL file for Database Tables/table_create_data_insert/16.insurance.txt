@@ -1,0 +1,17 @@
+create table insurance
+(
+social_id           varchar2(20),
+insurance_name       varchar2(40),
+insurance_type       varchar2(40),
+insurance_no        varchar2(20),
+
+constraint insurances_fk foreign key(social_id) references socio_economic_history(social_id)on delete cascade
+);
+
+insert into insurance values('SO01','American Life Insurance Co','Life Insurance','I001');
+insert into insurance values('SO02','Meghna Life Insurance Co Ltd','Life Insurance','I002');
+insert into insurance values('SO03','Sunlife Insurance Co','Education Insurance','I003');
+insert into insurance values('SO01','Rupali Insurance','Elder Insurance','I004');
+
+
+--multival of table socio_economic_history

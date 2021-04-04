@@ -1,0 +1,18 @@
+create table Addiction
+(
+person_id               varchar2(35),
+
+addiction_name          varchar2(30),
+cause                   varchar2(100),
+physical_effect         varchar2(100),
+physical_treatment  	varchar2(100),
+psychological_effect    varchar2(100),
+psychological_treatment varchar2(100),
+
+constraint addiction_fk foreign key(person_id) references addicted_child(person_id) on delete cascade
+);
+
+insert into Addiction values('P5006','Alcohol Addiction','Depression','High Blood Pressure','Therapy from Doctor','Mood swings','Therapy from Doctor');
+insert into Addiction values('P50010','Drug Addiction','Curiosity','Kidney Damage','Therapy from Doctor','Depression','Therapy from Doctor');
+
+--multival of table addicted_child

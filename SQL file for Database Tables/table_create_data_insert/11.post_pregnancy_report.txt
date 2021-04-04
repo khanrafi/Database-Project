@@ -1,0 +1,43 @@
+create table post_pregnancy_report
+(
+post_patient_id             varchar2(35),
+date_of_visit   date,
+
+delivary_type               varchar2(20),
+new_borns_body_temperature  number(5,2),
+hospital_clinic_name        varchar2(25),
+mothers_weight              number(5,2),
+babys_weight                number(5,2),
+delivary_date               date,
+
+mcad_deficiency             varchar2(15),
+cysticfibresis              varchar2(15),
+Phenylketonuria             varchar2(15),
+Galactosemia                varchar2(15),
+tyrosinemia                 varchar2(15),
+sickle_cell_disease         varchar2(15),
+biotinidase_deficiency      varchar2(15),
+
+person_id      varchar2(35),
+
+constraint post_pregnancy_report_fk foreign key(person_id) references mothers_pregnancy_info(person_id) on delete cascade,
+constraint post_pregnancy_report_pk primary key(post_patient_id,date_of_visit),
+
+CONSTRAINT post_pregnancy_report_ck CHECK
+(
+new_borns_body_temperature>=0.00 and mothers_weight>=0.00 and babys_weight >=0.00              
+)
+);
+
+
+insert into post_pregnancy_report values ('P001',to_date('10-Jul-2010','dd-mon-yyyy'),'Cesarean Birth',38.1,'Somorita Hospital',56,2.1,
+to_date('7-Jul-2010','dd-mon-yyyy'),'Negative','Negative','Negative','Negative','Negative','Negative','Negative','P5004');
+
+insert into post_pregnancy_report values ('P002',to_date('13-May-2013','dd-mon-yyyy'),'Cesarean Birth',35.0,'Dhaka Medical',58,2.2,
+to_date('10-May-2013','dd-mon-yyyy'),'Negative','Negative','Negative','Negative','Negative','Negative','Negative','P5005');
+
+insert into post_pregnancy_report values ('P003',to_date('10-Jul-2011','dd-mon-yyyy'),'Cesarean Birth',35.1,'Comilla Medical',66,2.6,
+to_date('1-Apr-2011','dd-mon-yyyy'),'Negative','Positive','Negative','Positive','Negative','Negative','Negative','P5007');
+
+insert into post_pregnancy_report values ('P004',to_date('17-Oct-2013','dd-mon-yyyy'),'Cesarean Birth',39.5,'Chadpur Medical',70,1.9,
+to_date('17-Oct-2013','dd-mon-yyyy'),'Negative','Positive','Negative','Negative','Negative','Negative','Negative','P5008');

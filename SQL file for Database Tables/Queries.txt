@@ -1,0 +1,24 @@
+select name,patient_id,disease_name,type,cause,treatment_taken,doctors_name,hospital_name ,eqipment_no,eqipment_name,cast(price as decimal(8,4))
+from pregnancy_info join during_pregnancy_report using(person_id) join pregnancy_disesse using(patient_id,disease_id) join disease using (disease_id)join 
+medical_support using(disease_id) join emergency_medical_support using(service_id) join emergency_medical_supply using (service_id) join medical_equipment 
+using(supply_id);
+
+
+select name,fathers_date_of_death,mothers_date_of_death,date_of_adaption,abuse_type,cause,physical_effect
+from child_abuse_effect join child_abuse using(case_id) join unexpected_event using(case_id) join orphan using(person_id);
+
+
+select name,vaccin_name,total_dose,prevented_disease,success_rate,cost,provider_name,provider_address
+from disease join person_disease_history using(disease_id) join child using (person_id) join supply_for_child using (person_id) join vaccin using(supply_id)
+where disease_name in (select disease_name from during_pregnency_report join pregnency_disease using(patient_id,disease_id) join disease using (disease_id));
+
+
+select count(birth_reg_no),date_of_birth,weight,doctors_name,record_no,tranaction_id,donor_name,donated_ammount,spent_ammount,donated_ammount-spent_ammount as "Remaining Ammount"
+form fund join emergency_medical_fund using(record_no,transaction_id) join emergency_medical_support using (service_id) join medical_spport_newborn using(service_id) join new_born using(birth_registration_no)
+where date_of_birth >=to_date('10-Jan-2009','DD-MM-YYYY')
+
+
+
+select name,babies_position,babies_weight,babies_heartbeat,posiible_date_of_delivary,hospital_name
+from mothers_pregnency_info join during_pregnency_report using(person_id) join ultra_sound_test using(patient_id,date_of_visit)
+where name in (select name from mothers_pregnency_info where gravidity=2 and parity=2)

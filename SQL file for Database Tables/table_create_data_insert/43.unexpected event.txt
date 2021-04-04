@@ -1,0 +1,14 @@
+create table unexpected_event
+(
+case_id   varchar(20),
+
+
+constraint unexpected_event_pk primary key(case_id)
+
+);
+
+insert into unexpected_event values('C01');
+insert into unexpected_event values('C02');
+insert into unexpected_event values('C03');
+insert into unexpected_event values('C04');
+

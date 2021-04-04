@@ -1,0 +1,21 @@
+create table save_newborn
+(
+birth_reg_no       varchar2(15),
+
+place_of_birth      varchar2(25),
+child_date_of_birth      date,
+weight             number(4,2),
+
+person_id      varchar2(35),
+constraint save_newborn_fk foreign key(person_id) references mothers_pregnancy_info(person_id) on delete cascade,
+constraint  save_newborn_pk primary key(birth_reg_no),
+
+CONSTRAINT save_newborn_ck CHECK(weight>=0.00)
+
+);
+
+
+insert into save_newborn values('PB001','Somorita Hospital',to_date('7-Jul-2010','DD-MON-YYYY'),2.1,'P5004');
+insert into save_newborn values('PB002','Dhaka Medical',to_date('10-May-2013','DD-MON-YYYY'),2.2,'P5005');
+insert into save_newborn values('PB003','Comilla Medical',to_date('1-Apr-2011','DD-MON-YYYY'),2.6,'P5007');
+insert into save_newborn values('PB004','Chadpur Medical',to_date('17-Oct-2013','DD-MON-YYYY'),1.9,'P5008');

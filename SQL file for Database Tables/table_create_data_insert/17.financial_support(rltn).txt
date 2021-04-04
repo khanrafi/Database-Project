@@ -1,0 +1,20 @@
+create table financial_support
+(
+social_id           varchar2(20),
+record_no        varchar2(15),
+transaction_id   varchar(50),
+
+constraint financial_support_fk1 foreign key(social_id) references socio_economic_history(social_id) on delete cascade,
+constraint financial_support_fk2 foreign key(record_no,transaction_id) references fund(record_no,transaction_id) on delete cascade
+
+);
+
+
+insert into financial_support values('SO01','01','T001');
+insert into financial_support values('SO02','02','T002');
+insert into financial_support values('SO03','03','T003');
+insert into financial_support values('SO04','02','T002');
+insert into financial_support values('SO04','04','T004');
+
+
+--relation between socio_economic_history and fund

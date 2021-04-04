@@ -1,0 +1,31 @@
+create table during_pregnancy_report
+(
+
+person_id      varchar2(35),
+date_of_visit   date,
+patient_id              varchar2(35),
+
+constraint during_pregnancy_report_fk foreign key(person_id) references mothers_pregnancy_info(person_id) on delete cascade,
+
+constraint during_pregnancy_report_pk primary key(patient_id,date_of_visit)
+
+);
+
+--has multival table blood_test,nutrition_test,
+--ultra_sound_report,urine_test,during_pregnancy_weight
+
+insert into during_pregnancy_report values('P5004',to_date('09-Feb-2010','DD-MON-YYYY'),'PP001');
+insert into during_pregnancy_report values('P5005',to_date('12-Dec-2012','DD-MON-YYYY'),'PP002');
+insert into during_pregnancy_report values('P5007',to_date('03-Dec-2010','DD-MON-YYYY'),'PP003');
+insert into during_pregnancy_report values('P5008',to_date('13-May-2013','DD-MON-YYYY'),'PP004');
+
+insert into during_pregnancy_report values('P5004',to_date('23-Feb-2010','DD-MON-YYYY'),'PP001');
+insert into during_pregnancy_report values('P5005',to_date('15-Dec-2012','DD-MON-YYYY'),'PP002');
+insert into during_pregnancy_report values('P5007',to_date('12-Dec-2010','DD-MON-YYYY'),'PP003');
+insert into during_pregnancy_report values('P5008',to_date('17-May-2013','DD-MON-YYYY'),'PP004');
+
+insert into during_pregnancy_report values('P5004',to_date('27-Feb-2010','DD-MON-YYYY'),'PP001');
+insert into during_pregnancy_report values('P5005',to_date('22-Dec-2012','DD-MON-YYYY'),'PP002');
+insert into during_pregnancy_report values('P5007',to_date('01-Jan-2011','DD-MON-YYYY'),'PP003');
+insert into during_pregnancy_report values('P5008',to_date('23-May-2013','DD-MON-YYYY'),'PP004');
+

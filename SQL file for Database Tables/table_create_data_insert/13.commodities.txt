@@ -1,0 +1,15 @@
+create table commodities
+(
+birth_reg_no    varchar2(30),
+equipment       varchar2(30),
+medicine        varchar2(25),
+
+constraint commodities_fk foreign key(birth_reg_no) references save_newborn(birth_reg_no)
+);
+
+
+insert into commodities values('PB001','Oxygen Concentrator Machine','Bronchodilators');
+insert into commodities values('PB002','Monitor','Aceon');
+insert into commodities values('PB003','Monitor','Bronchodilators');
+
+--multival of table save_newborn

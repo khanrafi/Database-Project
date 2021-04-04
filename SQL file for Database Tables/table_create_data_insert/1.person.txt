@@ -1,0 +1,40 @@
+create table Person
+(
+person_id      varchar2(35),
+
+name           varchar2(35),
+date_of_birth  date,
+email_address  varchar2(35),
+nationality    varchar2(20),
+blood_group    varchar2(5),
+religion       varchar2(10),
+gender         varchar2(10),
+city           varchar2(10),
+Zip_code       varchar2(10),
+street_name    varchar2(15),
+apartment_no   varchar2(10),
+
+constraint person_pk primary key(person_id),
+
+CONSTRAINT person_ck CHECK(person_id like 'P500_%' and gender ='Male' or gender='FeMale')
+
+);
+
+insert into person values('P5001','Arif','11-01-2010','arnab@gmail.com','Banglaeshi','B+','Islam','Male','Dhaka','1400','Suvas-lane','14b');
+insert into person values('P5002','Tasfiq','01-03-1992','tasfiq99@gmail.com','Bangladeshi','A+','Islam','Male','Dinajpur','3000','Wazed-Road','124t');
+insert into person values('P5003','Rafi','04-11-1997','rafi72@gmail.com','Bangladeshi','B+','Islam','Male','Manikganj','1234','Seru Mia','2a');
+insert into person values('P5004','Zeniffer','12-03-1990','durahan54@gmail.com','Bangladeshi','AB+','Islam','FeMale','Dhaka','1300','Rifat-Road','13c');
+insert into person values('P5005','Tania Tasin','09-08-1980','Tania4@yahoo.com','Bangladeshi','AB-','Islam','FeMale','Dhaka','19200','Gulsan','132/c');
+insert into person values('P5006','Tahsin','05-07-2009','Tahsination@gmail.com','Bangladeshi','AB+','Islam','Male','Dhaka','19200','Dhanmondi','1792/12');
+insert into person values('P5007','Mrs Smith','09-08-1980','smith9900@yahoo.com','Bangladeshi','A+','Islam','FeMale','Comilla','2000','Chasara','2/h');
+insert into person values('P5008','Rahima begum','05-09-1983','rahima100@yahoo.com','Bangladeshi','B+','Islam','FeMale','Chadpur','4000','Ali road','19-12/1');
+insert into person values('P5009','Maria','11-06-2008','mari100@yahoo.com','Bangladeshi','B+','Islam','FeMale','Chadpur','4000','Ali road','1f');
+insert into person values('P50010','Munna','03-07-2012','munma800@yahoo.com','Bangladeshi','A+','Islam','Male','Chadpur','4000','Ali road','1f');
+insert into person values('P50011','Iqbal husain','04-07-1989','iqbal809@yahoo.com','Bangladeshi','B+','Islam','Male','Dhaka','4000','Nayabazar','11A');
+insert into person values('P50012','Rahul','05-07-2007','rahu0@yahoo.com','Bangladeshi','O+','Islam','Male','Barishal','4000','bhola road','1190/12');
+insert into person values('P50013','Sadia','07-07-2015','raki40@yahoo.com','Bangladeshi','O-','Islam','FeMale','Dhaka','4000','Armanitola','7e');
+insert into person values('P50015','Arif2','11-01-2010','arnab@gmail.com','Banglaeshi','B+','Islam','Male','Dhaka','1400','Suvas-lane','14b');
+
+
+
+

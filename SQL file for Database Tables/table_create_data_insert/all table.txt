@@ -1,0 +1,1219 @@
+create table Person
+(
+person_id      varchar2(35),
+
+name           varchar2(35),
+date_of_birth  date,
+email_address  varchar2(35),
+nationality    varchar2(20),
+blood_group    varchar2(5),
+religion       varchar2(10),
+gender         varchar2(10),
+city           varchar2(10),
+Zip_code       varchar2(10),
+street_name    varchar2(15),
+apartment_no   varchar2(10),
+
+constraint person_pk primary key(person_id),
+
+CONSTRAINT person_ck CHECK(person_id like 'P500_%' and gender ='Male' or gender='FeMale')
+
+);
+
+insert into person values('P5001','Arif','11-01-2010','arnab@gmail.com','Banglaeshi','B+','Islam','Male','Dhaka','1400','Suvas-lane','14b');
+insert into person values('P5002','Tasfiq','01-03-1992','tasfiq99@gmail.com','Bangladeshi','A+','Islam','Male','Dinajpur','3000','Wazed-Road','124t');
+insert into person values('P5003','Rafi','04-11-1997','rafi72@gmail.com','Bangladeshi','B+','Islam','Male','Manikganj','1234','Seru Mia','2a');
+insert into person values('P5004','Zeniffer','12-03-1990','durahan54@gmail.com','Bangladeshi','AB+','Islam','FeMale','Dhaka','1300','Rifat-Road','13c');
+insert into person values('P5005','Tania Tasin','09-08-1980','Tania4@yahoo.com','Bangladeshi','AB-','Islam','FeMale','Dhaka','19200','Gulsan','132/c');
+insert into person values('P5006','Tahsin','05-07-2009','Tahsination@gmail.com','Bangladeshi','AB+','Islam','Male','Dhaka','19200','Dhanmondi','1792/12');
+insert into person values('P5007','Mrs Smith','09-08-1980','smith9900@yahoo.com','Bangladeshi','A+','Islam','FeMale','Comilla','2000','Chasara','2/h');
+insert into person values('P5008','Rahima begum','05-09-1983','rahima100@yahoo.com','Bangladeshi','B+','Islam','FeMale','Chadpur','4000','Ali road','19-12/1');
+insert into person values('P5009','Maria','11-06-2008','mari100@yahoo.com','Bangladeshi','B+','Islam','FeMale','Chadpur','4000','Ali road','1f');
+insert into person values('P50010','Munna','03-07-2012','munma800@yahoo.com','Bangladeshi','A+','Islam','Male','Chadpur','4000','Ali road','1f');
+insert into person values('P50011','Iqbal husain','04-07-1989','iqbal809@yahoo.com','Bangladeshi','B+','Islam','Male','Dhaka','4000','Nayabazar','11A');
+insert into person values('P50012','Rahul','05-07-2007','rahu0@yahoo.com','Bangladeshi','O+','Islam','Male','Barishal','4000','bhola road','1190/12');
+insert into person values('P50013','Sadia','07-07-2015','raki40@yahoo.com','Bangladeshi','O-','Islam','FeMale','Dhaka','4000','Armanitola','7e');
+
+
+
+
+
+create table mobile_no
+(
+person_id varchar2(35),
+mobile_no varchar2(15),
+
+constraint mobile_no_fk foreign key(person_id) references person(person_id) on delete cascade
+);
+
+--multival table of person
+
+
+insert into mobile_no values('P5001','016178141428');
+insert into mobile_no values('P5002','017179991920');
+insert into mobile_no values('P5002','019187731010');
+insert into mobile_no values('P5003','018148171435');
+insert into mobile_no values('P5004','015104705095');
+insert into mobile_no values('P5005','017144775535');
+insert into mobile_no values('P5006','018142761536');
+
+create table mothers_pregnancy_info
+(
+person_id      varchar2(35),
+
+gravidity      int,
+parity         int,
+LMP_date       date,
+previous_delivary_place   varchar2(20),
+
+constraint mothers_pregnancy_info_pk primary key(person_id),
+constraint mothers_pregnancy_info_fk foreign key(person_id) references person(person_id) on delete cascade,
+CONSTRAINT mothers_pregnancy_info_ck CHECK(gravidity>=0 and parity>=0)
+
+);
+--has multival table medicine
+
+
+insert into mothers_pregnancy_info values('P5004','3','3','12-03-2010','CMH');
+insert into mothers_pregnancy_info values('P5005','3','2','11-01-2012','Dhaka Medical');
+insert into mothers_pregnancy_info values('P5007','5','4','11-01-2010','Narayanganj clinic');
+insert into mothers_pregnancy_info values('P5008','1','2','12-05-2013','Chadpur Medical');
+
+
+
+
+
+create table medicine
+(
+person_id             varchar2(35),
+prescribed_medicine   varchar2(20),
+daily_dose            int,
+illness_curing        varchar2(50),
+
+
+constraint medicine_fk foreign key(person_id) references mothers_pregnancy_info(person_id) on delete cascade,
+CONSTRAINT medicine_ck CHECK(daily_dose>=0)
+
+);
+
+--multival mothers_pregnancy_info
+
+insert into medicine values('P5004','Aspirin',2,'Angina');
+insert into medicine values('P5005','Thiazide diuretics',1,'High Blood Pressure');
+insert into medicine values('P5007','Acarbose ',1,'Diabates');
+insert into medicine values('P5004','Fexofenadine',2,'Allergy');
+insert into medicine values('P5005','Retinoid',2,'Acne');
+insert into medicine values('P5008','Aspirin',2,'Headache');
+create table during_pregnancy_report
+(
+
+person_id      varchar2(35),
+date_of_visit   date,
+patient_id              varchar2(35),
+
+constraint during_pregnancy_report_fk foreign key(person_id) references mothers_pregnancy_info(person_id) on delete cascade,
+
+constraint during_pregnancy_report_pk primary key(patient_id,date_of_visit)
+
+);
+
+--has multival table blood_test,nutrition_test,
+--ultra_sound_report,urine_test,during_pregnancy_weight
+
+insert into during_pregnancy_report values('P5004',to_date('09-Feb-2010','DD-MON-YYYY'),'PP001');
+insert into during_pregnancy_report values('P5005',to_date('12-Dec-2012','DD-MON-YYYY'),'PP002');
+insert into during_pregnancy_report values('P5007',to_date('03-Dec-2010','DD-MON-YYYY'),'PP003');
+insert into during_pregnancy_report values('P5008',to_date('13-May-2013','DD-MON-YYYY'),'PP004');
+
+insert into during_pregnancy_report values('P5004',to_date('23-Feb-2010','DD-MON-YYYY'),'PP001');
+insert into during_pregnancy_report values('P5005',to_date('15-Dec-2012','DD-MON-YYYY'),'PP002');
+insert into during_pregnancy_report values('P5007',to_date('12-Dec-2010','DD-MON-YYYY'),'PP003');
+insert into during_pregnancy_report values('P5008',to_date('17-May-2013','DD-MON-YYYY'),'PP004');
+
+insert into during_pregnancy_report values('P5004',to_date('27-Feb-2010','DD-MON-YYYY'),'PP001');
+insert into during_pregnancy_report values('P5005',to_date('22-Dec-2012','DD-MON-YYYY'),'PP002');
+insert into during_pregnancy_report values('P5007',to_date('01-Jan-2011','DD-MON-YYYY'),'PP003');
+insert into during_pregnancy_report values('P5008',to_date('23-May-2013','DD-MON-YYYY'),'PP004');
+create table blood_test
+(
+patient_id         varchar2(35),
+date_of_visit      date, 
+
+rbc_count          number(6,2),
+platelet_count     number(16,2),
+blood_sugar_level  number(6,2),
+hdl_cholesterol    number(8,2),
+ldl_cholesterol    number(8,2),
+blood_urea         number(8,2),
+hemoglobin         number(8,2),
+blood_pressure     number(8,2),
+wbc_count          number(8,2),
+
+ 
+
+constraint blood_test_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT blood_test_ck CHECK(rbc_count >=0.00 and platelet_count>=0.00 and blood_sugar_level>=0.00 and hdl_cholesterol >=0.00
+ and ldl_cholesterol >=0.00 and blood_urea >=0.00 and hemoglobin>=0.00 and blood_pressure>=0.00 and wbc_count >=0.00  )
+
+);
+
+
+insert into  blood_test values('PP001',to_date('09-Feb-2010','DD-MON-YYYY'),4.6,200000,110,59,100,8,10,125,5500);
+insert into  blood_test values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),4.6,200000,130,69,105,8,13,120,5400);
+
+insert into  blood_test values('PP002',to_date('12-Dec-2012','DD-MON-YYYY'),5.1,350000,85,43,96,12,11,120,6000);
+insert into  blood_test values('PP002',to_date('15-Dec-2012','DD-MON-YYYY'),5.4,350000,80,47,116,12,17,115,6000);
+
+insert into blood_test values('PP003',to_date('03-Dec-2010','DD-MON-YYYY'),5.0,180000,90,60,111,14,10.5,130,7500);
+insert into blood_test values('PP003',to_date('01-Jan-2011','DD-MON-YYYY'),5.0,180000,94,55,119,14,12.5,138,7500);
+
+insert into  blood_test values('PP004',to_date('13-May-2013','DD-MON-YYYY'),4.9,210000,96,43,110,16,11.5,110,10000);
+insert into  blood_test values('PP004',to_date('17-May-2013','DD-MON-YYYY'),4.9,210000,95,47,130,16,11.0,140,10000);
+
+--multivalued of table during_pregnancy_report
+
+create table ultra_sound_report
+(
+patient_id                  varchar2(35),
+date_of_visit       date,
+
+pregnancy_week              int,
+possible_week_of_delivary int,
+hospital_clinic_name        varchar2(25),
+babys_position              varchar2(20),
+babys_heart_beat            int,
+babys_gender                varchar2(8),
+
+
+constraint ultra_sound_report_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT ultra_sound_report_ck CHECK(pregnancy_week >=0 and babys_heart_beat>=0)
+
+);
+
+--multivalued of during_pregnancy_report
+
+insert into ultra_sound_report values('PP001',to_date('09-Feb-2010','DD-MON-YYYY'),18,36,'Somorita Hospital','Anterior',130,'Male');
+insert into ultra_sound_report values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),19,37,'Somorita Hospital','Anterior',125,'FeMale');
+insert into ultra_sound_report values('PP002',to_date('12-Dec-2012','DD-MON-YYYY'),22,39,'Dinajpur clinic','Posterior',125,'Female');
+insert into ultra_sound_report values('PP003',to_date('12-Dec-2010','DD-MON-YYYY'),15,38,'Dhaka Medical','Breech',140,'Male');
+insert into ultra_sound_report values('PP004',to_date('17-May-2013','DD-MON-YYYY'),15,38,'Chadpur Medical','Breech',140,'Male');
+
+
+create table urine_test
+(
+patient_id              varchar2(35),
+date_of_visit   date,
+uric_acid               number(6,2),
+ph_level                number(4,2),
+nitrite                 number(6,2),
+protein                 number(6,2),
+ketones                 number(6,2),
+glucose                 number(6,2),
+
+
+constraint urine_test_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT urine_test_ck CHECK
+(uric_acid >=0 and ph_level>=0 and nitrite  >=0  
+and protein>=0.00  and ketones>=0.00 and glucose>=0.00                 
+)
+
+);
+
+
+--multivalued of during_pregnancy_report
+
+insert into urine_test values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),2.5,6.1,140,20,25,.8);
+insert into urine_test values('PP002',to_date('15-Dec-2012','DD-MON-YYYY'),2.5,6.1,140,20,25,.8);
+insert into urine_test values('PP003',to_date('12-Dec-2010','DD-MON-YYYY'),2.3,6.9,120,18,23,.13);
+insert into urine_test values('PP003',to_date('01-Jan-2011','DD-MON-YYYY'),4.6,5.6,150,6,24,.8);
+insert into urine_test values('PP004',to_date('13-May-2013','DD-MON-YYYY'),1.8,6,145,12,35,1.0);
+
+
+--uric_acid mg/dL
+--protein mg/dL
+--ketones mg/dL
+--glucose mmol/L
+create table nutrition_test
+(
+patient_id              varchar2(35),
+date_of_visit          date,
+riboflavin              number(5,2),
+folate                  number(5,2),
+iron                    number(5,2),
+protein                 number(5,2),
+calcium                 number(5,2),
+vitaminA                int,
+vitaminb6               int,
+thiamin                 number(5,2),
+
+
+
+constraint nutrition_test_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT nutrition_test_ck CHECK
+( riboflavin >=0.00 and folate >=0.00 and iron>=0.00 and protein >=0.00 
+and calcium >=0.00  and vitaminA >=0 and vitaminb6>=0 and thiamin >=0.00 
+)                 
+
+
+);
+
+--multival table of during_pregnancy_report
+
+insert into nutrition_test values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),6.7,13.4,7.1,8.9,17.1,7,4,4.9);
+insert into nutrition_test values('PP002',to_date('12-Dec-2012','DD-MON-YYYY'),6.5,13.8,6.1,8.9,17.3,7,4,4.7);
+insert into nutrition_test values('PP003',to_date('01-Jan-2011','DD-MON-YYYY'),12.4,10.1,6.5,10.4,5.8,4,6,4.1);
+insert into nutrition_test values('PP004',to_date('13-May-2013','DD-MON-YYYY'),8.4,15.4,4.6,10.1,20,26,3,5.1);
+
+
+--riboflavin ug/dL
+--iron g/dL
+--protein g/dL
+--calcium mg/dL
+--vitaminA mcg/dL
+--vitaminA ug/L
+--thiamin ug/dL
+--u=micro
+create table during_pregnancy_weight
+(
+patient_id    varchar2(35),
+date_of_visit   date,
+weight        number(5,2),
+week          int,
+
+constraint during_pregnancy_weight_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT during_pregnancy_weight_ck CHECK
+(weight  >=0.00 and
+week  >=0
+)
+
+);
+
+--multivalued of during_pregnancy_report
+
+insert into during_pregnancy_weight values('PP001',to_date('09-Feb-2010','DD-MON-YYYY'),57.2,18);
+insert into during_pregnancy_weight values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),58.9,34);
+insert into during_pregnancy_weight values('PP002',to_date('12-Dec-2012','DD-MON-YYYY'),68.6,22);
+insert into during_pregnancy_weight values('PP003',to_date('03-Dec-2010','DD-MON-YYYY'),71.3,15);
+insert into during_pregnancy_weight values('PP004',to_date('13-May-2013','DD-MON-YYYY'),71.3,15);
+insert into during_pregnancy_weight values('PP004',to_date('17-May-2013','DD-MON-YYYY'),72.3,16);
+create table post_pregnancy_report
+(
+post_patient_id             varchar2(35),
+date_of_visit   date,
+
+delivary_type               varchar2(20),
+new_borns_body_temperature  number(5,2),
+hospital_clinic_name        varchar2(25),
+mothers_weight              number(5,2),
+babys_weight                number(5,2),
+delivary_date               date,
+
+mcad_deficiency             varchar2(15),
+cysticfibresis              varchar2(15),
+Phenylketonuria             varchar2(15),
+Galactosemia                varchar2(15),
+tyrosinemia                 varchar2(15),
+sickle_cell_disease         varchar2(15),
+biotinidase_deficiency      varchar2(15),
+
+person_id      varchar2(35),
+
+constraint post_pregnancy_report_fk foreign key(person_id) references mothers_pregnancy_info(person_id) on delete cascade,
+constraint post_pregnancy_report_pk primary key(post_patient_id,date_of_visit),
+
+CONSTRAINT post_pregnancy_report_ck CHECK
+(
+new_borns_body_temperature>=0.00 and mothers_weight>=0.00 and babys_weight >=0.00              
+)
+);
+
+
+insert into post_pregnancy_report values ('P001',to_date('10-Jul-2010','dd-mon-yyyy'),'Cesarean Birth',38.1,'Somorita Hospital',56,2.1,
+to_date('7-Jul-2010','dd-mon-yyyy'),'Negative','Negative','Negative','Negative','Negative','Negative','Negative','P5004');
+
+insert into post_pregnancy_report values ('P002',to_date('13-May-2013','dd-mon-yyyy'),'Cesarean Birth',35.0,'Dhaka Medical',58,2.2,
+to_date('10-May-2013','dd-mon-yyyy'),'Negative','Negative','Negative','Negative','Negative','Negative','Negative','P5005');
+
+insert into post_pregnancy_report values ('P003',to_date('10-Jul-2011','dd-mon-yyyy'),'Cesarean Birth',35.1,'Comilla Medical',66,2.6,
+to_date('1-Apr-2011','dd-mon-yyyy'),'Negative','Positive','Negative','Positive','Negative','Negative','Negative','P5007');
+
+insert into post_pregnancy_report values ('P004',to_date('17-Oct-2013','dd-mon-yyyy'),'Cesarean Birth',39.5,'Chadpur Medical',70,1.9,
+to_date('17-Oct-2013','dd-mon-yyyy'),'Negative','Positive','Negative','Negative','Negative','Negative','Negative','P5008');
+create table save_newborn
+(
+birth_reg_no       varchar2(15),
+
+place_of_birth      varchar2(25),
+child_date_of_birth      date,
+weight             number(4,2),
+
+person_id      varchar2(35),
+constraint save_newborn_fk foreign key(person_id) references mothers_pregnancy_info(person_id) on delete cascade,
+constraint  save_newborn_pk primary key(birth_reg_no),
+
+CONSTRAINT save_newborn_ck CHECK(weight>=0.00)
+
+);
+
+
+insert into save_newborn values('PB001','Somorita Hospital',to_date('7-Jul-2010','DD-MON-YYYY'),2.1,'P5004');
+insert into save_newborn values('PB002','Dhaka Medical',to_date('10-May-2013','DD-MON-YYYY'),2.2,'P5005');
+insert into save_newborn values('PB003','Comilla Medical',to_date('1-Apr-2011','DD-MON-YYYY'),2.6,'P5007');
+insert into save_newborn values('PB004','Chadpur Medical',to_date('17-Oct-2013','DD-MON-YYYY'),1.9,'P5008');
+create table commodities
+(
+birth_reg_no    varchar2(30),
+equipment       varchar2(30),
+medicine        varchar2(25),
+
+constraint commodities_fk foreign key(birth_reg_no) references save_newborn(birth_reg_no)
+);
+
+
+insert into commodities values('PB001','Oxygen Concentrator Machine','Bronchodilators');
+insert into commodities values('PB002','Monitor','Aceon');
+insert into commodities values('PB003','Monitor','Bronchodilators');
+
+--multival of table save_newborn
+create table Fund
+(
+record_no        varchar2(15),
+transaction_id   varchar(50),
+
+donor_name       varchar2(20),
+donated_amount   int,
+donor_address    varchar(50),
+spent_amount    int,
+
+
+constraint fund_pk primary key(record_no,transaction_id),
+
+CONSTRAINT fund_ck CHECK
+(
+donated_amount>=0 and spent_amount>=0 and transaction_id like 'T00_%'
+)
+);
+
+insert into fund values('01','T001','Abir','5000','12 no road Mirpur 2','5000');
+insert into fund values('02','T002','Wazed','10000','17 no road Mirpur 12','8000');
+insert into fund values('03','T003','Zobair','100000','2 no road Gulshan 2','35000');
+insert into fund values('04','T004','Zahid','80000','2 no road Banani Fr Tower','65000');
+
+select * from fund;
+create table socio_economic_history
+(
+social_id           varchar2(20),
+
+yearly_saving       int,
+occupation          varchar2(15),
+total_working_hour  int, 
+yearly_tax          int,
+monthly_expenses    int,
+marriage_status     varchar2(10),
+person_id      varchar2(35),
+
+
+constraint socio_economic_history_fk foreign key(person_id) references person(person_id) on delete cascade,
+constraint socio_economic_history_uk unique(person_id),
+
+constraint socio_economic_history_pk primary key(social_id),
+
+CONSTRAINT socio_economic_history_ck CHECK
+(
+   social_id like 'SO0_%' and
+yearly_saving  >=0 and total_working_hour >=0 and yearly_tax >=0 and monthly_expenses>=0
+)
+);
+
+
+insert into socio_economic_history values('SO01','10000','Businessman','8','15000','30000','married','P5002');
+insert into socio_economic_history values('SO02','20000','Businessman','9','5000','25000','married','P5004');
+insert into socio_economic_history values('SO03','11890000','Businessman','9','5000','33000','unmarried','P5007');
+insert into socio_economic_history values('SO04','9000','Businessman','9','5000','33000','married','P50011');
+
+create table insurance
+(
+social_id           varchar2(20),
+insurance_name       varchar2(40),
+insurance_type       varchar2(40),
+insurance_no        varchar2(20),
+
+constraint insurances_fk foreign key(social_id) references socio_economic_history(social_id)on delete cascade
+);
+
+insert into insurance values('SO01','American Life Insurance Co','Life Insurance','I001');
+insert into insurance values('SO02','Meghna Life Insurance Co Ltd','Life Insurance','I002');
+insert into insurance values('SO03','Sunlife Insurance Co','Education Insurance','I003');
+insert into insurance values('SO01','Rupali Insurance','Elder Insurance','I004');
+
+
+--multival of table socio_economic_history
+create table financial_support
+(
+social_id           varchar2(20),
+record_no        varchar2(15),
+transaction_id   varchar(50),
+
+constraint financial_support_fk1 foreign key(social_id) references socio_economic_history(social_id) on delete cascade,
+constraint financial_support_fk2 foreign key(record_no,transaction_id) references fund(record_no,transaction_id) on delete cascade
+
+);
+
+
+insert into financial_support values('SO01','01','T001');
+insert into financial_support values('SO02','02','T002');
+insert into financial_support values('SO03','03','T003');
+insert into financial_support values('SO04','02','T002');
+insert into financial_support values('SO04','04','T004');
+
+
+--relation between socio_economic_history and fund
+create table disease
+(
+disease_id   varchar2(15),
+
+disease_name   varchar2(25),
+disease_type   varchar2(25),
+cause          varchar2(100),
+symptom        varchar2(100),
+disease_duration       int,    
+disablity_disorder_name  varchar2(35),
+age_of_detection         int,
+treatment_taken          varchar2(155),   
+
+
+constraint disease_pk primary key(disease_id),
+
+CONSTRAINT disease_ck CHECK(disease_duration >=0 and
+age_of_detection>=0
+)
+);
+
+insert into disease values('D001','Mumps','Infectious disease','Infection','Discomfort in the salivary glands',4,'',37,'Ibuprofen Medicine');
+insert into disease values('D002','Hay Fever','Allergy','Allergen','Sneezing',3,'',28,'Nasal corticosteroids');
+insert into disease values('D003','Angina Pectoris','Heart Disease','Allergen','Heart Pain',15,'',28,'Nitroglycerin');
+insert into disease values('D004','Cirrhosis','Liver Disease','Drug','Abdominal pain',28,'Encopresis',39,'Niacin');
+insert into disease values('D005','Post traumatic stress','Mental Imbalance','Pregnancy After-effect','Intense feelings of distress',1,'Autism spectrum disorder',39,'Antidepressant');
+insert into disease values('D006','Postpartum Infections','Infectious disease','Pregnancy After-effect','Blood clots',1,'',29,'Cephalexin');
+create table disease_history
+(
+disease_id   varchar2(15),
+person_id   varchar2(35),
+
+constraint disease_history_fk1 foreign key(person_id) references person(person_id) on delete cascade,
+constraint disease_history_fk2 foreign key(disease_id) references disease(disease_id) on delete cascade
+
+);
+
+insert into disease_history values ('D001','P5001');
+insert into disease_history values ('D003','P5002');
+insert into disease_history values ('D002','P5006');
+insert into disease_history values ('D002','P50010');
+insert into disease_history values ('D005','P5008');
+
+--relation between person and disease
+create table pregnancy_disease
+(
+disease_id   varchar2(15),
+patient_id   varchar2(35),
+date_of_visit   date,
+
+constraint pregnancy_disease_fk1 foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+constraint pregnancy_disease_fk2 foreign key(disease_id) references disease(disease_id) on delete cascade
+
+);
+
+insert into pregnancy_disease values('D002','PP001',to_date('09-Feb-2010','DD-MON-YYYY'));
+insert into pregnancy_disease values('D001','PP001',to_date('23-Feb-2010','DD-MON-YYYY'));
+insert into pregnancy_disease values('D003','PP003',to_date('03-Dec-2010','DD-MON-YYYY'));
+insert into pregnancy_disease values('D002','PP004',to_date('13-May-2013','DD-MON-YYYY'));
+
+
+--relaion between during_pregnancy_report and disease
+create table post_pregnancy_disease
+(
+disease_id   varchar2(15),
+post_patient_id   varchar2(35),
+date_of_visit date,
+
+constraint  post_pregnancy_disease_fk1 foreign key(post_patient_id,date_of_visit) references post_pregnancy_report(post_patient_id,date_of_visit) on delete cascade,
+constraint  post_pregnancy_disease_fk2 foreign key(disease_id) references disease(disease_id) on delete cascade
+
+
+);
+
+insert into post_pregnancy_disease values('D006','P002',to_date('13-May-2013','dd-mon-yyyy'));
+insert into post_pregnancy_disease values('D005','P003',to_date('10-Jul-2011','dd-mon-yyyy'));
+
+--reltaionship between post_pregnancy_report and disease
+create table supply_and_logistics
+(
+supply_id          varchar2(20),
+  
+constraint  supply_and_logistics_pk primary key(supply_id)
+
+);
+
+insert into supply_and_logistics values('S01');
+insert into supply_and_logistics values('S02');
+insert into supply_and_logistics values('S03');
+insert into supply_and_logistics values('S04');
+insert into supply_and_logistics values('S05');
+insert into supply_and_logistics values('S06');
+insert into supply_and_logistics values('S07');
+insert into supply_and_logistics values('S08');
+insert into supply_and_logistics values('S09');
+insert into supply_and_logistics values('S010');
+insert into supply_and_logistics values('S011');
+insert into supply_and_logistics values('S012');
+insert into supply_and_logistics values('S013');
+insert into supply_and_logistics values('S014');
+insert into supply_and_logistics values('S015');
+create table emergency_medical_support
+(
+service_id       varchar2(20),
+
+doctors_name            varchar2(15),
+location                varchar2(15),
+hospital_clinic_name    varchar2(15),
+health_worker_address   varchar2(35),
+health_worker_id        varchar2(10),
+previous_job            varchar2(20),
+health_worker_name      varchar2(20),
+
+constraint emergency_medical_support_pk primary key(service_id)
+);
+
+insert into emergency_medical_support values('SI001','Anjum Aara','Dhaka','Dhaka Medical','Jamalpur Sodor','H001','Student','Rifat Beaugm');
+insert into emergency_medical_support values('SI002','Rabeya Khatun','Rongpur','Rongpur Clinic','Kutilmari Rongpur','H002','Business','Tabassum ');
+insert into emergency_medical_support values('SI003','Rahima Islam','Chadpur','Chadpur Clinic','Rupnogor Chadpur','H003','Student','Rifat Beaugm');
+insert into emergency_medical_support values('SI004','Sofia Alam','Siranjjong','Anondo Clinic','Bagerhat','H004','Garments Worker','Arifa Islam');
+insert into emergency_medical_support values('SI005','Rafa Islam','Dhaka','Dhaka Medical','Dhaka','H005','Student','Sadia Mim');
+insert into emergency_medical_support values('SI006','Sadia Hasan','Comilla','Comilla Medical','Kurigram','H006','Student','Nadira Islam');
+create table medical_support
+(
+disease_id   varchar2(15),
+service_id   varchar2(20),
+
+constraint medical_support_fk1 foreign key(service_id) references emergency_medical_support(service_id) on delete cascade,
+constraint medical_support_fk2 foreign key(disease_id) references disease(disease_id) on delete cascade
+
+);
+
+insert into medical_support values('D001','SI001');
+insert into medical_support values('D002','SI001');
+insert into medical_support values('D002','SI002');
+insert into medical_support values('D003','SI003');
+insert into medical_support values('D004','SI004');
+insert into medical_support values('D005','SI005');
+insert into medical_support values('D006','SI005');
+insert into medical_support values('D006','SI006');
+
+--relation between disease and emergency_medical_support
+create table medical_support_newborn
+(
+birth_reg_no       varchar2(15),
+service_id   varchar2(20),
+
+constraint medical_support_newborn_fk1 foreign key(service_id) references emergency_medical_support(service_id) on delete cascade,
+constraint medical_support_newborn_fk2 foreign key(birth_reg_no) references save_newborn(birth_reg_no) on delete cascade
+
+);
+
+insert into medical_support_newborn values ('PB001','SI002');
+insert into medical_support_newborn values ('PB003','SI005');
+insert into medical_support_newborn values ('PB004','SI006');
+
+--relation between save_newborn and emergency_medical_support
+create table fund_emergency_medical
+(
+record_no        varchar2(15),
+transaction_id   varchar(50),
+service_id   varchar2(20),
+
+constraint fund_emergency_medical_fk2 foreign key(record_no,transaction_id) references fund(record_no,transaction_id) on delete cascade,
+constraint fund_emergency_medical_fk1 foreign key(service_id) references emergency_medical_support(service_id) on delete cascade
+);
+
+insert into fund_emergency_medical values('01','T001','SI001');
+insert into fund_emergency_medical values('02','T002','SI002');
+insert into fund_emergency_medical values('03','T003','SI003');
+insert into fund_emergency_medical values('03','T003','SI005');
+insert into fund_emergency_medical values('04','T004','SI005');
+
+
+
+--relation between fund and emergency_medical_support
+create table emergency_medical_supply
+(
+supply_id          varchar2(20),
+service_id   varchar2(20),
+
+constraint emergency_medical_supply_fk1 foreign key(service_id) references emergency_medical_support(service_id) on delete cascade,
+constraint emergency_medical_supply_fk2 foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade
+
+);
+
+insert into emergency_medical_supply values('S07','SI001');
+insert into emergency_medical_supply values('S08','SI001');
+insert into emergency_medical_supply values('S09','SI002');
+insert into emergency_medical_supply values('S010','SI003');
+insert into emergency_medical_supply values('S011','SI004');
+insert into emergency_medical_supply values('S012','SI005');
+
+
+--relation between supply_and_logistics and emergency_medical_support
+create table Child
+(
+person_id      varchar2(35),
+
+father_id      varchar2(35),
+mother_id      varchar2(35),
+
+constraint child_fk foreign key(person_id) references person(person_id) on delete cascade,
+constraint child_pk primary key(person_id) 
+);
+
+
+
+insert into child values('P5001','P5002','P5004');
+insert into child values('P5006','P5002','P5004');
+insert into child values('P5009','P5003','P5007');
+insert into child values('P50010','P50011','P5008');
+insert into child values('P50012','','P5008');
+insert into child values('P50013','','');
+
+
+create table child_relative
+(
+person_id      varchar2(35),
+
+relative_name  varchar2(15),
+relation       varchar2(15),
+
+constraint child_relative_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+insert into child_relative values('P5009','Karimullah','Uncle');
+insert into child_relative values('P50010','Rashedul Islam','Uncle');
+insert into child_relative values('P50012','Rabaya Akhter','Aunt');
+insert into child_relative values('P50013','Rahima Akter','Grandmother');
+
+
+--multival of child
+create table uprooted_child
+(
+person_id      varchar2(35),
+
+cause          varchar2(100),
+homeland       varchar2(20),
+camp_location  varchar2(10),
+asylum_applicant  varchar2(15),
+refugee         varchar2(15),
+
+constraint uprooted_child_pk primary key(person_id) ,
+constraint uprooted_child_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+insert into uprooted_child values('P5001','Racism','Myanmar','Coxs Bazar','NO','YES');
+insert into uprooted_child values('P5006','Racism','Myanmar','Chittagong','YES','YES');
+insert into uprooted_child values('P50012','War','Syria','','YES','NO');
+create table disabled_child
+(
+person_id      varchar2(35),
+
+disease_type    varchar2(25),
+disability_or_disorder_name   varchar2(35),
+age_of_detection    varchar2(15),
+cause                varchar2(35),
+
+constraint disabled_child_pk primary key(person_id) ,
+constraint disabled_child_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+insert into disabled_child values('P5001','Vision Impairment','Blindless',3,'Macular degeneration');
+insert into disabled_child values('P5009','Mental Disability','Autism Spectrum Disorder',5,'Prenatal Viral Infection');
+insert into disabled_child values('P50010','Vision Impairment','Physical Disability',1,'Abnormal Development of the Brain');
+create table Orphan
+(
+person_id      varchar2(35),
+
+fathers_date_of_death   date,
+mothers_date_of_death   date,
+
+fathers_cause_of_death   varchar2(20),
+mothers_cause_of_death   varchar2(20),
+families_looking_for_adoption  int,
+date_of_adoption               date,
+date_of_entry                  date,
+
+constraint orphan_pk primary key(person_id),
+constraint orphan_fk foreign key(person_id) references child(person_id) on delete cascade 
+);
+
+insert into Orphan values('P50012','06-10-2004','','Cancer','',3,'10-10-2010','05-01-2007');
+insert into Orphan values('P50013','05-05-2005','05-05-2005','Heart Attack','Accidenet',1,'','06-05-2010');
+insert into Orphan values('P5009','05-05-2005','05-05-2005','Accident','Accidenet',0,'','06-05-2012');
+create table child_worker
+(
+person_id      varchar2(35),
+
+cause                  varchar2(50),
+total_monthly_income   int,
+working_area           varchar2(50),
+daily_work_hour        int,
+working_type           varchar2(30),
+
+constraint child_worker_pk primary key(person_id),
+constraint child_worker_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+insert into child_worker values('P5001','Poverty',2500,'Mirpur',10,'Domestic work');
+insert into child_worker values('P5006','Poverty',3500,'Mirpur',8,'Electrician');
+insert into child_worker values('P50012','Poverty',2000,'Kochukhet',9,'Agriculture');
+insert into child_worker values('P50013','Poverty',1500,'Kurigram',9,'Agriculture');
+--has multival table accidents_in_workplace
+create table accidents_in_workplace
+(
+person_id                       varchar2(35),
+accident_name                   varchar2(30),
+outcome                         varchar2(30),
+compensation_from_employeer     int,
+
+
+constraint accidents_in_workplace_fk foreign key(person_id) references child_worker(person_id) on delete cascade
+);
+
+insert into accidents_in_workplace values('P5001','Electric Shock','Death',200000);
+insert into accidents_in_workplace values('P50012','Falling From Roof','Breaking Leg',1000);
+
+--multival of table child_worker
+create table addicted_child
+(
+person_id      varchar2(35),
+
+constraint addicted_child_pk primary key(person_id),
+constraint addicted_child_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+
+insert into addicted_child values('P5006');
+insert into addicted_child values('P50010');
+
+--has multival table addiction
+create table Addiction
+(
+person_id               varchar2(35),
+
+addiction_name          varchar2(30),
+cause                   varchar2(100),
+physical_effect         varchar2(100),
+physical_treatment  	varchar2(100),
+psychological_effect    varchar2(100),
+psychological_treatment varchar2(100),
+
+constraint addiction_fk foreign key(person_id) references addicted_child(person_id) on delete cascade
+);
+
+insert into Addiction values('P5006','Alcohol Addiction','Depression','High Blood Pressure','Therapy from Doctor','Mood swings','Therapy from Doctor');
+insert into Addiction values('P50010','Drug Addiction','Curiosity','Kidney Damage','Therapy from Doctor','Depression','Therapy from Doctor');
+
+--multival of table addicted_child
+create table Education
+(
+education_id          varchar2(20),
+institution_name      varchar2(30),
+institution_location  varchar2(15),
+yearly_educational_expenses   int,
+attendance_rate       number(4,2),
+
+person_id      varchar2(35),
+
+constraint education_fk foreign key(person_id) references child(person_id) on delete cascade,
+constraint education_uk unique(person_id),
+
+constraint education_pk primary key(education_id)
+);
+
+insert into Education values('E001','Asuganj Prathomi Biddaloy','Asuganj',30000,80,'P5001');
+insert into Education values('E002','Dhanmondi High School','Dhanmondi',15000,70,'P5006');
+insert into Education values('E003','Ideal School','Mothijhil',10000,90,'P5009');
+insert into Education values('E004','Addorso Biddaloy','Maniknogor',30000,80,'P50010');
+insert into Education values('E005','Ahmed Bawany','Manikganj',20000,60,'P50013');
+
+
+--has multival table result
+create table result_of_child
+(
+class          int,
+result         varchar2(10),
+
+education_id   varchar2(20),
+
+constraint result_of_child_fk foreign key(education_id) references education(education_id)on delete cascade
+);
+
+insert into result_of_child values(2,'B+','E001');
+insert into result_of_child values(4,'F','E002');
+insert into result_of_child values(6,'D','E003');
+insert into result_of_child values(1,'C','E004');
+
+--multival of education
+create table Shelter
+(
+shelter_id           varchar2(15),
+
+establishment_date   date,
+max_capacity         int,
+location             varchar2(15),
+shelter_provider     varchar2(15),
+total_area           number(6,2),
+total_worker         int,
+
+person_id      varchar2(35),
+
+constraint shelter_fk foreign key(person_id) references child(person_id) on delete cascade,
+constraint shelter_uk unique(person_id),
+
+constraint shelter_pk primary key(shelter_id)
+
+
+);
+insert into Shelter values('SH01',to_date('11-01-2011','DD-MM-YYYY'),1000,'Rajsahi','ENOVO',20,300,'P5001');
+insert into Shelter values('SH02',to_date('14-06-2012','DD-MM-YYYY'),2000,'DHAKA','DINO',122,4300,'P5006');
+insert into Shelter values('SH03',to_date('13-01-2016','DD-MM-YYYY'),3000,'COMILLA','SQUARE',223,2200,'P5009');
+insert into Shelter values('SH04',to_date('1-02-2011','DD-MM-YYYY'),3300,'CHITTAGONG','TRAP',22,2001,'P50010');
+insert into Shelter values('SH05',to_date('11-01-2012','DD-MM-YYYY'),4100,'Rajsahi','MAHO',21,2100,'P50012');
+create table Health_record
+(
+
+health_record_id   varchar2(15),
+person_id      varchar2(35),
+
+constraint health_record_fk foreign key(person_id) references child(person_id) on delete cascade,
+constraint health_record_uk unique(person_id),
+
+constraint health_record_pk primary key(health_record_id)
+);
+
+insert into health_record values('H01','P5001');
+insert into health_record values('H02','P5006');
+insert into health_record values('H03','P5009');
+insert into health_record values('H04','P50010');
+insert into health_record values('H05','P50012');
+insert into health_record values('H06','P50013');
+
+
+--multival growth_rate
+create table growth_rate
+(
+health_record_id   varchar2(15),
+
+date_of_record                 date,
+percentage_of_weight          int,
+percentage_of_height          int,
+percentage_of_hemoglobin      int,
+percentage_of_RBC             int,
+percentage_of_protein         int,
+blood_pressure            varchar2(15), 
+immunoglobulin     varchar2(30),
+             
+
+constraint growth_rate_fk foreign key(health_record_id) references health_record(health_record_id) on delete cascade
+
+);
+
+insert into growth_rate values('H01',to_date('12-01-2010','DD-MM-YYYY'),12,50,41,33,44,'32p','high');
+insert into growth_rate values('H02',to_date('12-01-2010','DD-MM-YYYY'),42,52,34,13,34,'30p','low');
+insert into growth_rate values('H03',to_date('12-01-2010','DD-MM-YYYY'),22,54,54,23,23,'31p','mid');
+insert into growth_rate values('H03',to_date('12-01-2011','DD-MM-YYYY'),22,51,64,43,13,'32p','high');
+insert into growth_rate values('H04',to_date('12-01-2012','DD-MM-YYYY'),52,54,14,13,23,'31p','mid');
+insert into growth_rate values('H05',to_date('12-01-2012','DD-MM-YYYY'),53,52,14,12,20,'30p','low');
+insert into growth_rate values('H06',to_date('12-01-2012','DD-MM-YYYY'),56,58,14,11,23,'31p','mid');
+create table supply_for_child
+(
+
+person_id      varchar2(35),
+
+supply_id          varchar2(20),
+  
+constraint child_accidents_fk1 foreign key(person_id) references child(person_id) on delete cascade,
+constraint child_accidents_fk2 foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade
+
+);
+insert into supply_for_child values('P5001','S01');
+insert into supply_for_child values('P5001','S02');
+insert into supply_for_child values('P5001','S04');
+insert into supply_for_child values('P5006','S01');
+insert into supply_for_child values('P5006','S02');
+insert into supply_for_child values('P5006','S04');
+insert into supply_for_child values('P5006','S010');
+insert into supply_for_child values('P5009','S02');
+insert into supply_for_child values('P5009','S03');
+insert into supply_for_child values('P5009','S05');
+insert into supply_for_child values('P5006','S011');
+insert into supply_for_child values('P50010','S01');
+insert into supply_for_child values('P50010','S02');
+insert into supply_for_child values('P50010','S05');
+insert into supply_for_child values('P50012','S02');
+insert into supply_for_child values('P50012','S03');
+insert into supply_for_child values('P50012','S06');
+insert into supply_for_child values('P50012','S012');
+insert into supply_for_child values('P50013','S01');
+insert into supply_for_child values('P50013','S02');
+insert into supply_for_child values('P50013','S04');
+
+
+
+
+--relation between child and supply_and_logistics
+create table unexpected_event
+(
+case_id   varchar(20),
+
+
+constraint unexpected_event_pk primary key(case_id)
+
+);
+
+insert into unexpected_event values('C01');
+insert into unexpected_event values('C02');
+insert into unexpected_event values('C03');
+insert into unexpected_event values('C04');
+
+create table child_accidents
+(
+person_id      varchar2(35),
+case_id   varchar(20),
+
+constraint child_accidents_fk100 foreign key(person_id) references child(person_id) on delete cascade,
+constraint child_accidents_fk10 foreign key(case_id) references unexpected_event(case_id) on delete cascade
+
+
+);
+insert into child_accidents values('P5001','C01');
+insert into child_accidents values('P5006','C02');
+insert into child_accidents values('P5009','C02');
+insert into child_accidents values('P5009','C03');
+insert into child_accidents values('P50010','C04');
+
+
+
+
+--relation between child and unexpected_event
+create table child_death_record
+(
+case_id         varchar2(20),
+
+death_reg_no    varchar2(15),
+date_of_death   date,
+cause_of_death  varchar2(200),
+age             int,
+
+
+constraint child_death_record_fk foreign key(case_id) references unexpected_event(case_id) on delete cascade,
+constraint child_death_record_pk primary key(death_reg_no)
+);
+
+insert into child_death_record values('C02','0002',to_date('11-03-2003','DD-MM-YYYY'),'viral fever',7);
+insert into child_death_record values('C03','0003',to_date('1-06-2002','DD-MM-YYYY'),'pneumonia',5);
+create table early_marriage_history
+( 
+case_id     varchar(20),
+victims_age         int,
+partners_name    varchar(15),
+partners_age                  int,
+family_membres_assossiation   varchar2(100), 
+cause                         varchar2(100),
+
+
+constraint early_marriage_history_fk foreign key(case_id) references unexpected_event(case_id) on delete cascade,
+constraint early_marriage_history_pk primary key(case_id)
+);
+
+insert into early_marriage_history values('C03',12,'Chulbul',50,'partial','financial');
+insert into early_marriage_history values('C04',16,'Abul',45,'partial','financial');
+
+create table child_abuse_history
+(
+case_id                     varchar2(20),
+
+victims_report                varchar2(100),
+abuse_type                    varchar2(15),
+relationship_with_aggressor   varchar2(15),
+cause                         varchar2(150),
+
+constraint child_abuse_history_fk foreign key(case_id) references unexpected_event(case_id) on delete cascade,
+constraint child_abuse_history_pk primary key(case_id)
+); 
+insert into child_abuse_history values('C01','injured','physical','father-son','aggression');
+insert into child_abuse_history values('C02','suicide','mental','husband-wife','rage');
+insert into child_abuse_history values('C03','death','mental-physical','husband-wife','dowry');
+--has multival table abuse_effect
+create table abuse_effect
+(
+case_id            varchar2(15),
+emotional_effect     varchar2(50),
+physical_effect      varchar2(50),
+treatment            varchar2(15),
+
+
+constraint abuse_effect_fk foreign key(case_id) references child_abuse_history(case_id) on delete cascade
+);
+
+
+insert into abuse_effect values('C01','heavy','light','consoling');
+insert into abuse_effect values('C02','heavy','heavy','hospitalization');
+insert into abuse_effect values('C03','light','heavy','rehab');
+
+--multival of table child_abuse_history
+create table educational_support
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+record_no       varchar2(15),
+book_name       varchar2(15),
+book_type     varchar2(15),
+other_material_name  varchar2(150),
+
+constraint educational_support_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade,
+constraint educational_support_pk primary key(supply_id),
+CONSTRAINT supply_and_logistics_ck CHECK(budget  >=0)
+);
+
+insert into educational_support values('S01',100000,'Ensure Education','district-outskirts','district board office',150000,'r01','Math-primary','Math','Geometric-Instruments');
+insert into educational_support values('S02',150000,'Ensure Education','district-bank','district-bank',149000,'r02','bangla-primary','bangla','');
+insert into educational_support values('S03',1440000,'Ensure Education','district-board','district-bank',1323000,'r04','ICT-primary','primary','computers');
+
+
+
+create table food
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+provider_name     varchar2(40),
+provider_address  varchar2(40),
+
+preserved_amount    int,
+food_name           varchar2(15),
+food_type            varchar2(15),
+total_calorie       int,
+
+constraint food_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade,
+constraint food_pk primary key(supply_id)
+
+);
+
+insert into food values('S04',200000,'welfare','rajsahi-city-bank','rajsahi-city-board',150000,'Al-Falah-Bangladesh','Iqbal Road Dhaka',500000,'rice','carbohidrade',300);
+insert into food values('S05',200000,'welfare','chittagong-city-bank','chittagong-city-board',50000,'Wave Foundation','Badda Dhaka',150000,'rice','carbohidrade',300);
+insert into food values('S06',2200000,'welfare','Dhaka-city-bank','Dhaka-city-bank',1300000,'Sunlife Foundation','Azimpur Dhaka',70000,'fruits','vitamins',600);
+
+--weak entity
+create table medical_equipment
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+equipment_no                varchar2(15),
+
+equipment_name              varchar2(20),
+provider_name     varchar2(40), 
+provider_address  varchar2(40),
+delivary_date	            date,						
+
+constraint medical_equipment_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade,
+constraint medical_equipment_pk primary key(supply_id)
+);
+
+insert into medical_equipment values('S07',2300000,'welfare','Rajsahi-city-bank','Rajsahi-city-bank',3200000,'E01','Xray machine','Domain inc','Dhaka-1201',to_date('12-02-2011','DD-MM-YYYY'));
+insert into medical_equipment values('S08',2200000,'development','moimonsingh-city-bank','moimonsingh-city-bank',2200000,'E02','MRI machine','Worlz inc','Dhaka-gulsan-301',to_date('2-03-2013','DD-MM-YYYY'));
+insert into medical_equipment values('S09',3200000,'development','jamalpur-city-board','lamalpur-city-bank',2300000,'E03','Heart rate analyzer','Medico inc','Dhaka-dhanmondi-201',to_date('2-03-2014','DD-MM-YYYY'));
+create table vaccine
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+provider_name     varchar2(40),
+provider_address  varchar2(40),
+
+vaccine_name        varchar2(15),
+total_dose          int,
+prevented_disease   varchar2(20),
+success_rate        number(5,2),
+side_effects        varchar2(200),
+injection_method    varchar2(20),  
+
+constraint vaccine_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade,
+constraint vaccine_pk primary key(supply_id)
+
+);
+insert into  vaccine values('S010',2300000,'welfare','Jamalpur-city-bank','Jamalpur-city-bank',1200000,'Antar Welfare Foundation','Banani Dhaka','pneumovax',4,'pneumonia',90,'NONE','Direct-inject');
+insert into  vaccine values('S011',3300000,'welfare','Shyllet-city-bank','Shyllet-city-bank',2100000,'Care Bangladesh','Uttara Dhaka','Retrovirus',24,'RTV',90,'NONE','Direct-inject');
+insert into  vaccine values('S012',1100000,'Safety','DHAKA-TRUST-bank','DHAKA-city-bank',2100000,'Bangladesh Child Welfare Society','Savar Dhaka','DTAP',2,'Diptheria',92,'NONE','Direct-inject');
+create table water_sanitation
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+provider_name     varchar2(40),
+provider_address  varchar2(40),
+
+
+area_no                  int,
+area_name                varchar2(50),
+water_arsenic_level  	         number(5,2),
+no_of_pure_water_source  int,
+water_quality            varchar2(15),
+pure_water_source_needed   int,
+
+constraint water_sanitation_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade, 
+constraint water_sanitation_pk primary key(supply_id)
+);
+insert into  water_sanitation values('S013',3200000,'Safety','Rajshahi-TRUST-bank','Rajshahi-city-bank',1500000,'ActionAid Bangladesh','Hemayetpur Dhaka',1201,'city-corparation',4.1,200,'medium',800);
+insert into  water_sanitation values('S014',2200000,'development','Dhaka-TRUST-bank','Dhaka-city-bank',1500000,'Al-Rifat Bangladesh','Dhanmondi Dhaka',1201,'city-board',2.1,400,'low',200);
+
+
+--has multival table hygiene_equipment
+create table hygiene_equipment
+(
+supply_id          varchar2(20),
+equipment_name          varchar2(15),
+equipment_supplied     int,
+
+constraint hygiene_equipment_fk foreign key(supply_id)references water_sanitation(supply_id)on delete cascade
+);
+
+
+
+insert into  hygiene_equipment values('S013','MASK',20000);
+insert into  hygiene_equipment values('S014','Brooms',10000);
+
+
+--multival of water_sanitation

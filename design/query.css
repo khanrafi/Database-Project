@@ -1,0 +1,61 @@
+/* body{
+     background: pink;
+} */
+.table_container1{
+  margin: 30px;
+}
+.form-start{
+     margin-top: 50px;
+}
+
+h1{
+     margin-top: 70px;
+     text-align: center;
+     background: pink;
+}
+#gender{
+     margin-right: 20px;
+}
+.mycss{
+     margin-left: 2px;
+     margin-right: 2px;
+     width: 80px;
+     border: 0px;
+     color: white;
+}
+
+button{
+     /* margin-top: 20px; */
+     float: right;
+}
+
+.jumbotron{
+     height: auto;
+}
+.hi{
+     float: left
+}
+
+h1{
+     color: black;
+     background: white;
+}
+
+.homebutton{
+     m-l=45%
+}
+
+#ok{
+     color: black;
+     background: pink;
+}
+
+#okButton{
+     margin-left: 45%;
+     margin-right: 45%;
+}
+
+tr{
+      padding-left: 20px;
+      padding-right: 20px;
+ }

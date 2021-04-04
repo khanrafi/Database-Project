@@ -1,0 +1,25 @@
+create table Shelter
+(
+shelter_id           varchar2(15),
+
+establishment_date   date,
+max_capacity         int,
+location             varchar2(15),
+shelter_provider     varchar2(15),
+total_area           number(6,2),
+total_worker         int,
+
+person_id      varchar2(35),
+
+constraint shelter_fk foreign key(person_id) references child(person_id) on delete cascade,
+constraint shelter_uk unique(person_id),
+
+constraint shelter_pk primary key(shelter_id)
+
+
+);
+insert into Shelter values('SH01',to_date('11-01-2011','DD-MM-YYYY'),1000,'Rajsahi','ENOVO',20,300,'P5001');
+insert into Shelter values('SH02',to_date('14-06-2012','DD-MM-YYYY'),2000,'DHAKA','DINO',122,4300,'P5006');
+insert into Shelter values('SH03',to_date('13-01-2016','DD-MM-YYYY'),3000,'COMILLA','SQUARE',223,2200,'P5009');
+insert into Shelter values('SH04',to_date('1-02-2011','DD-MM-YYYY'),3300,'CHITTAGONG','TRAP',22,2001,'P50010');
+insert into Shelter values('SH05',to_date('11-01-2012','DD-MM-YYYY'),4100,'Rajsahi','MAHO',21,2100,'P50012');

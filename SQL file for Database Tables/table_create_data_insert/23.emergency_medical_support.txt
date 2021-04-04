@@ -1,0 +1,21 @@
+create table emergency_medical_support
+(
+service_id       varchar2(20),
+
+doctors_name            varchar2(15),
+location                varchar2(15),
+hospital_clinic_name    varchar2(15),
+health_worker_address   varchar2(35),
+health_worker_id        varchar2(10),
+previous_job            varchar2(20),
+health_worker_name      varchar2(20),
+
+constraint emergency_medical_support_pk primary key(service_id)
+);
+
+insert into emergency_medical_support values('SI001','Anjum Aara','Dhaka','Dhaka Medical','Jamalpur Sodor','H001','Student','Rifat Beaugm');
+insert into emergency_medical_support values('SI002','Rabeya Khatun','Rongpur','Rongpur Clinic','Kutilmari Rongpur','H002','Business','Tabassum ');
+insert into emergency_medical_support values('SI003','Rahima Islam','Chadpur','Chadpur Clinic','Rupnogor Chadpur','H003','Student','Rifat Beaugm');
+insert into emergency_medical_support values('SI004','Sofia Alam','Siranjjong','Anondo Clinic','Bagerhat','H004','Garments Worker','Arifa Islam');
+insert into emergency_medical_support values('SI005','Rafa Islam','Dhaka','Dhaka Medical','Dhaka','H005','Student','Sadia Mim');
+insert into emergency_medical_support values('SI006','Sadia Hasan','Comilla','Comilla Medical','Kurigram','H006','Student','Nadira Islam');

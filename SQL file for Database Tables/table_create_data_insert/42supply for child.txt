@@ -1,0 +1,37 @@
+create table supply_for_child
+(
+
+person_id      varchar2(35),
+
+supply_id          varchar2(20),
+  
+constraint child_accidents_fk1 foreign key(person_id) references child(person_id) on delete cascade,
+constraint child_accidents_fk2 foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade
+
+);
+insert into supply_for_child values('P5001','S01');
+insert into supply_for_child values('P5001','S02');
+insert into supply_for_child values('P5001','S04');
+insert into supply_for_child values('P5006','S01');
+insert into supply_for_child values('P5006','S02');
+insert into supply_for_child values('P5006','S04');
+insert into supply_for_child values('P5006','S010');
+insert into supply_for_child values('P5009','S02');
+insert into supply_for_child values('P5009','S03');
+insert into supply_for_child values('P5009','S05');
+insert into supply_for_child values('P5006','S011');
+insert into supply_for_child values('P50010','S01');
+insert into supply_for_child values('P50010','S02');
+insert into supply_for_child values('P50010','S05');
+insert into supply_for_child values('P50012','S02');
+insert into supply_for_child values('P50012','S03');
+insert into supply_for_child values('P50012','S06');
+insert into supply_for_child values('P50012','S012');
+insert into supply_for_child values('P50013','S01');
+insert into supply_for_child values('P50013','S02');
+insert into supply_for_child values('P50013','S04');
+
+
+
+
+--relation between child and supply_and_logistics

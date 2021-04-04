@@ -1,0 +1,25 @@
+create table growth_rate
+(
+health_record_id   varchar2(15),
+
+date_of_record                 date,
+percentage_of_weight          int,
+percentage_of_height          int,
+percentage_of_hemoglobin      int,
+percentage_of_RBC             int,
+percentage_of_protein         int,
+blood_pressure            varchar2(15), 
+immunoglobulin     varchar2(30),
+             
+
+constraint growth_rate_fk foreign key(health_record_id) references health_record(health_record_id) on delete cascade
+
+);
+
+insert into growth_rate values('H01',to_date('12-01-2010','DD-MM-YYYY'),12,50,41,33,44,'32p','high');
+insert into growth_rate values('H02',to_date('12-01-2010','DD-MM-YYYY'),42,52,34,13,34,'30p','low');
+insert into growth_rate values('H03',to_date('12-01-2010','DD-MM-YYYY'),22,54,54,23,23,'31p','mid');
+insert into growth_rate values('H03',to_date('12-01-2011','DD-MM-YYYY'),22,51,64,43,13,'32p','high');
+insert into growth_rate values('H04',to_date('12-01-2012','DD-MM-YYYY'),52,54,14,13,23,'31p','mid');
+insert into growth_rate values('H05',to_date('12-01-2012','DD-MM-YYYY'),53,52,14,12,20,'30p','low');
+insert into growth_rate values('H06',to_date('12-01-2012','DD-MM-YYYY'),56,58,14,11,23,'31p','mid');

@@ -1,0 +1,19 @@
+create table fund_emergency_medical
+(
+record_no        varchar2(15),
+transaction_id   varchar(50),
+service_id   varchar2(20),
+
+constraint fund_emergency_medical_fk2 foreign key(record_no,transaction_id) references fund(record_no,transaction_id) on delete cascade,
+constraint fund_emergency_medical_fk1 foreign key(service_id) references emergency_medical_support(service_id) on delete cascade
+);
+
+insert into fund_emergency_medical values('01','T001','SI001');
+insert into fund_emergency_medical values('02','T002','SI002');
+insert into fund_emergency_medical values('03','T003','SI003');
+insert into fund_emergency_medical values('03','T003','SI005');
+insert into fund_emergency_medical values('04','T004','SI005');
+
+
+
+--relation between fund and emergency_medical_support

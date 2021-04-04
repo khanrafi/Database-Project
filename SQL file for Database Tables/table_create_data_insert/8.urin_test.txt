@@ -1,0 +1,35 @@
+create table urine_test
+(
+patient_id              varchar2(35),
+date_of_visit   date,
+uric_acid               number(6,2),
+ph_level                number(4,2),
+nitrite                 number(6,2),
+protein                 number(6,2),
+ketones                 number(6,2),
+glucose                 number(6,2),
+
+
+constraint urine_test_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT urine_test_ck CHECK
+(uric_acid >=0 and ph_level>=0 and nitrite  >=0  
+and protein>=0.00  and ketones>=0.00 and glucose>=0.00                 
+)
+
+);
+
+
+--multivalued of during_pregnancy_report
+
+insert into urine_test values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),2.5,6.1,140,20,25,.8);
+insert into urine_test values('PP002',to_date('15-Dec-2012','DD-MON-YYYY'),2.5,6.1,140,20,25,.8);
+insert into urine_test values('PP003',to_date('12-Dec-2010','DD-MON-YYYY'),2.3,6.9,120,18,23,.13);
+insert into urine_test values('PP003',to_date('01-Jan-2011','DD-MON-YYYY'),4.6,5.6,150,6,24,.8);
+insert into urine_test values('PP004',to_date('13-May-2013','DD-MON-YYYY'),1.8,6,145,12,35,1.0);
+
+
+--uric_acid mg/dL
+--protein mg/dL
+--ketones mg/dL
+--glucose mmol/L

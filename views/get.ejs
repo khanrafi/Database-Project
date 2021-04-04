@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>DBMS group-7</title>]
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="/design/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/design/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+	<link rel="stylesheet" href="/design/get.css">
+	<style media="screen">
+	.viewer_btn{
+		background-color: #01579B;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.dev_btn{
+		background-color: #EEFF41;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.admin_btn{
+		background-color: #D84315;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.user_name{
+				color: #ffffff;
+			}
+
+	</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-default fixed-top">
+		<% if (btn==2)  { %>
+      <a class="navbar-brand dev_btn" href=<%=link%>>DBMS</a> <span class="user_name"><%= user %></span>
+    <%}  else if (btn==3)  { %>
+      <a class="navbar-brand admin_btn" href=<%=link%>>DBMS</a> <span class="user_name"><%= user %></span>
+    <% } else{ %>
+        <a class="navbar-brand viewer_btn" href=<%=link%>>DBMS</a> <span class="user_name"><%= user %></span>
+      <%}%>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto"></ul>
+			<ul class="navbar-nav navbar-left">
+					<div class="btn-group">
+				<li class="nav-item ">
+						<button type="button" class="btn btn-dark btn-outline-primary btn-sm mycss dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Account
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href=<%=link + "profile"%>>Login as mother</a>
+							<a class="dropdown-item" href="#login-child">Login for child</a>
+					</div>
+			</li>
+			<li class="nav-item ">
+
+				<button type="button" class="btn btn-dark btn-outline-warning btn-sm mycss dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Worker
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#health-volunteer">Health Volunteer</a>
+					<a class="dropdown-item" href=<%=link + "login-developer" %>>Employee</a>
+			</div>
+			</li>
+				<li class="nav-item">
+					<a role="button" class="btn btn-dark btn-outline-danger btn-sm mycss" href=<%=link + "login-admin" %>>Admin</a>
+				</li>
+				<li class="nav-item">
+					<a role="button" class="btn btn-dark btn-outline-success btn-sm mycss" href=<%=link + "register"%>>Register</a>
+				</li>
+				<li class="nav-item">
+					<a role="button" class="btn btn-dark btn-outline-secondary btn-sm mycss" href=<%=link + "home"%>>Logout</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	<br>
+
+	<div class="container ">
+		<h1 class="display-3">Insert into <%= table%></h1>
+	</div>
+
+	<% if(flag) { %>
+
+	<% console.log("column = " + column); %>
+	<form action=<%= "/post/" + table %> method="POST">
+		<div class="container d-flex justify-content-around contenting">
+			<div class="container jumbotron item mr-2">
+				<% for(var i = 0; i < column.length/2; i++) { %>
+				<% if(column[i][0] == sequenced_column) {%>
+					<%console.log(column[i][0]+sequenced_column+"test");%>
+					<%console.log("test1");%>
+					<div class="form-group">
+						<label for= <%= column[i][0] %> ><%= column[i][0] %> </label>
+						<input type="text" class="form-control" id=<%= column[i][0] %> name=<%= column[i][0] %> placeholder=<%= currval %> value = <%= currval %> 	readonly="readonly" >
+					</div>
+				<% } else if(column[i][0] == "GENDER" ){ %>
+				<%console.log(column[i][0]+sequenced_column+"test");%>
+				<div class="form-group d-flex flex-column align-content-start">
+					<div class="container align-self-start">
+						GENDER
+					</div>
+						<div class="container custom-control custom-radio">
+							<input type="radio" id="Male" name="GENDER" value="Male" class="custom-control-input">
+							<label class="custom-control-label" for="Male">Male</label>
+						</div>
+						<div class="container custom-control custom-radio">
+							<input type="radio" id="Female" name="GENDER" value="Female" class="custom-control-input">
+							<label class="custom-control-label" for="Female">Female</label>
+						</div>
+						<div class="container custom-control custom-radio">
+							<input type="radio" id="Other" name="GENDER" value="Other" class="custom-control-input">
+							<label class="custom-control-label" for="Other">Other</label>
+						</div>
+					</div>
+					<% } else if (column[i][1] == "DATE" ){%>
+						<%console.log(column[i][0]+sequenced_column+"test");%>
+						<div class="form-group">
+							<label for=<%= column[i][0] %>><%= column[i][0] %> </label>
+							<input type="date"  class="form-control" id=<%= column[i][0] %> name=<%= column[i][0] %> placeholder=<%= "Enter " + column[i][0] %>>
+						</div>
+					<% } else if (column[i][1] == "NUMBER" || column[i][1] == "INT" ){%>
+						<%console.log(column[i][0]+sequenced_column+"test");%>
+						<div class="form-group">
+							<label for=<%= column[i][0] %>><%= column[i][0] %> </label>
+							<input type="number"  class="form-control" id=<%= column[i][0] %> name=<%= column[i][0] %> placeholder=<%= "Enter " + column[i][0] %>>
+						</div>
+					<% } else {%>
+						<%console.log(column[i][0]+sequenced_column+"test");%>
+						<div class="form-group">
+							<label for= <%= column[i][0] %> ><%= column[i][0] %> </label>
+							<input type="text" class="form-control" id=<%= column[i][0] %> name=<%= column[i][0] %> placeholder=<%= "Enter " + column[i][0] %>>
+						</div>
+					<% }} %>
+			</div>
+
+			<div class="container jumbotron item ml-2">
+				<% for(var i = Math.ceil(column.length/2); i < column.length; i++) { %>
+				<% if(column[i][0] == "GENDER" ){ %>
+				<div class="form-group d-flex flex-column justify-content-around contenting">
+					<div class="container align-self-start">
+						GENDER
+					</div>
+					<div class="container custom-control custom-radio">
+						<input type="radio" id="Male" name="GENDER" value="Male" class="custom-control-input">
+						<label class="custom-control-label" for="Male">Male</label>
+					</div>
+					<div class="container custom-control custom-radio">
+						<input type="radio" id="Female" name="GENDER" value="Female" class="custom-control-input">
+						<label class="custom-control-label" for="Female">Female</label>
+					</div>
+					<div class="container custom-control custom-radio">
+						<input type="radio" id="Other" name="GENDER" value="Other" class="custom-control-input">
+						<label class="custom-control-label" for="Other">Other</label>
+					</div>
+				</div>
+				<% } else if (column[i][1] == "DATE" ){%>
+					<div class="form-group">
+					<label for=<%= column[i][0] %>><%= column[i][0] %> </label>
+						<input type="date"  class="form-control" id=<%= column[i][0] %> name=<%= column[i][0] %> placeholder=<%= "Enter " + column[i][0] %>>
+					</div>
+					<% } else if (column[i][1] == "NUMBER" ){%>
+						<div class="form-group">
+						<label for=<%= column[i][0] %>><%= column[i][0] %> </label>
+						<input type="number"  class="form-control" id=<%= column[i][0] %> name=<%= column[i][0] %> placeholder=<%= "Enter " + column[i][0] %>>
+						</div>
+				<% } else {%>
+				<div class="form-group">
+					<label for=<%= column[i][0] %>><%= column[i][0] %> </label>
+					<input type="text" class="form-control" id=<%= column[i][0] %> name=<%= column[i][0] %> placeholder=<%= "Enter " + column[i][0] %>>
+				</div>
+				<% }} %>
+
+			</div>
+		</div>
+		<div class="container d-flex justify-content-center">
+			<button type="submit" class="btn btn-primary submit">Submit</button>
+			<br><br><br>
+		</div>
+	</form>
+
+
+	<% } else{ %>
+	<div class="jumbotron container">
+		<h1 class="display-1" id="ok">Data inserted succesfully</h1>
+		<a href=<%=link%> id="okButton" class="btn btn btn-dark btn-outline-info btn-sm align-middle">Home Page</a>
+		<% } %>
+	</div>
+
+	<script src="/design/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="/design/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="/design/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="/design/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

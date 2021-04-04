@@ -1,0 +1,28 @@
+create table water_sanitation
+(
+supply_id          varchar2(20),
+budget             int,
+supply_policy      varchar2(100),
+meeting_place      varchar2(100),
+supply_to_location varchar2(50),
+total_cost      int,
+
+provider_name     varchar2(40),
+provider_address  varchar2(40),
+
+
+area_no                  int,
+area_name                varchar2(50),
+water_arsenic_level  	         number(5,2),
+no_of_pure_water_source  int,
+water_quality            varchar2(15),
+pure_water_source_needed   int,
+
+constraint water_sanitation_fk foreign key(supply_id) references supply_and_logistics(supply_id) on delete cascade, 
+constraint water_sanitation_pk primary key(supply_id)
+);
+insert into  water_sanitation values('S013',3200000,'Safety','Rajshahi-TRUST-bank','Rajshahi-city-bank',1500000,'ActionAid Bangladesh','Hemayetpur Dhaka',1201,'city-corparation',4.1,200,'medium',800);
+insert into  water_sanitation values('S014',2200000,'development','Dhaka-TRUST-bank','Dhaka-city-bank',1500000,'Al-Rifat Bangladesh','Dhanmondi Dhaka',1201,'city-board',2.1,400,'low',200);
+
+
+--has multival table hygiene_equipment

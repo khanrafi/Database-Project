@@ -1,0 +1,16 @@
+create table post_pregnancy_disease
+(
+disease_id   varchar2(15),
+post_patient_id   varchar2(35),
+date_of_visit date,
+
+constraint  post_pregnancy_disease_fk1 foreign key(post_patient_id,date_of_visit) references post_pregnancy_report(post_patient_id,date_of_visit) on delete cascade,
+constraint  post_pregnancy_disease_fk2 foreign key(disease_id) references disease(disease_id) on delete cascade
+
+
+);
+
+insert into post_pregnancy_disease values('D006','P002',to_date('13-May-2013','dd-mon-yyyy'));
+insert into post_pregnancy_disease values('D005','P003',to_date('10-Jul-2011','dd-mon-yyyy'));
+
+--reltaionship between post_pregnancy_report and disease

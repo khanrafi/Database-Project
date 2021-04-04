@@ -1,0 +1,22 @@
+create table mothers_pregnancy_info
+(
+person_id      varchar2(35),
+
+gravidity      int,
+parity         int,
+LMP_date       date,
+previous_delivary_place   varchar2(20),
+
+constraint mothers_pregnancy_info_pk primary key(person_id),
+constraint mothers_pregnancy_info_fk foreign key(person_id) references person(person_id) on delete cascade,
+CONSTRAINT mothers_pregnancy_info_ck CHECK(gravidity>=0 and parity>=0)
+
+);
+--has multival table medicine
+
+
+insert into mothers_pregnancy_info values('P5004','3','3','12-03-2010','CMH');
+insert into mothers_pregnancy_info values('P5005','3','2','11-01-2012','Dhaka Medical');
+insert into mothers_pregnancy_info values('P5007','5','4','11-01-2010','Narayanganj clinic');
+insert into mothers_pregnancy_info values('P5008','1','2','12-05-2013','Chadpur Medical');
+insert into mothers_pregnancy_info values('P50015','3','3','12-03-2010','CMH');

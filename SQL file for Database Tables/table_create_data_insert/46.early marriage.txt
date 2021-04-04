@@ -1,0 +1,17 @@
+create table early_marriage_history
+( 
+case_id     varchar(20),
+victims_age         int,
+partners_name    varchar(15),
+partners_age                  int,
+family_membres_assossiation   varchar2(100), 
+cause                         varchar2(100),
+
+
+constraint early_marriage_history_fk foreign key(case_id) references unexpected_event(case_id) on delete cascade,
+constraint early_marriage_history_pk primary key(case_id)
+);
+
+insert into early_marriage_history values('C03',12,'Chulbul',50,'partial','financial');
+insert into early_marriage_history values('C04',16,'Abul',45,'partial','financial');
+

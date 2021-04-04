@@ -1,0 +1,15 @@
+create table medical_support_newborn
+(
+birth_reg_no       varchar2(15),
+service_id   varchar2(20),
+
+constraint medical_support_newborn_fk1 foreign key(service_id) references emergency_medical_support(service_id) on delete cascade,
+constraint medical_support_newborn_fk2 foreign key(birth_reg_no) references save_newborn(birth_reg_no) on delete cascade
+
+);
+
+insert into medical_support_newborn values ('PB001','SI002');
+insert into medical_support_newborn values ('PB003','SI005');
+insert into medical_support_newborn values ('PB004','SI006');
+
+--relation between save_newborn and emergency_medical_support

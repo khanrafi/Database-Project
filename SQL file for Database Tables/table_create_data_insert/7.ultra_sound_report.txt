@@ -1,0 +1,28 @@
+create table ultra_sound_report
+(
+patient_id                  varchar2(35),
+date_of_visit       date,
+
+pregnancy_week              int,
+possible_week_of_delivary int,
+hospital_clinic_name        varchar2(25),
+babys_position              varchar2(20),
+babys_heart_beat            int,
+babys_gender                varchar2(8),
+
+
+constraint ultra_sound_report_fk foreign key(patient_id,date_of_visit) references during_pregnancy_report(patient_id,date_of_visit) on delete cascade,
+
+CONSTRAINT ultra_sound_report_ck CHECK(pregnancy_week >=0 and babys_heart_beat>=0)
+
+);
+
+--multivalued of during_pregnancy_report
+
+insert into ultra_sound_report values('PP001',to_date('09-Feb-2010','DD-MON-YYYY'),18,36,'Somorita Hospital','Anterior',130,'Male');
+insert into ultra_sound_report values('PP001',to_date('23-Feb-2010','DD-MON-YYYY'),19,37,'Somorita Hospital','Anterior',125,'FeMale');
+insert into ultra_sound_report values('PP002',to_date('12-Dec-2012','DD-MON-YYYY'),22,39,'Dinajpur clinic','Posterior',125,'Female');
+insert into ultra_sound_report values('PP003',to_date('12-Dec-2010','DD-MON-YYYY'),15,38,'Dhaka Medical','Breech',140,'Male');
+insert into ultra_sound_report values('PP004',to_date('17-May-2013','DD-MON-YYYY'),15,38,'Chadpur Medical','Breech',140,'Male');
+
+

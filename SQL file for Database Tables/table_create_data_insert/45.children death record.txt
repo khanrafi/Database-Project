@@ -1,0 +1,16 @@
+create table child_death_record
+(
+case_id         varchar2(20),
+
+death_reg_no    varchar2(15),
+date_of_death   date,
+cause_of_death  varchar2(200),
+age             int,
+
+
+constraint child_death_record_fk foreign key(case_id) references unexpected_event(case_id) on delete cascade,
+constraint child_death_record_pk primary key(death_reg_no)
+);
+
+insert into child_death_record values('C02','0002',to_date('11-03-2003','DD-MM-YYYY'),'viral fever',7);
+insert into child_death_record values('C03','0003',to_date('1-06-2002','DD-MM-YYYY'),'pneumonia',5);

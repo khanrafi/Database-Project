@@ -1,0 +1,17 @@
+create table uprooted_child
+(
+person_id      varchar2(35),
+
+cause          varchar2(100),
+homeland       varchar2(20),
+camp_location  varchar2(10),
+asylum_applicant  varchar2(15),
+refugee         varchar2(15),
+
+constraint uprooted_child_pk primary key(person_id) ,
+constraint uprooted_child_fk foreign key(person_id) references child(person_id) on delete cascade
+);
+
+insert into uprooted_child values('P5001','Racism','Myanmar','Coxs Bazar','NO','YES');
+insert into uprooted_child values('P5006','Racism','Myanmar','Chittagong','YES','YES');
+insert into uprooted_child values('P50012','War','Syria','','YES','NO');

@@ -1,0 +1,31 @@
+create table socio_economic_history
+(
+social_id           varchar2(20),
+
+yearly_saving       int,
+occupation          varchar2(15),
+total_working_hour  int, 
+yearly_tax          int,
+monthly_expenses    int,
+marriage_status     varchar2(10),
+person_id      varchar2(35),
+
+
+constraint socio_economic_history_fk foreign key(person_id) references person(person_id) on delete cascade,
+constraint socio_economic_history_uk unique(person_id),
+
+constraint socio_economic_history_pk primary key(social_id),
+
+CONSTRAINT socio_economic_history_ck CHECK
+(
+   social_id like 'SO0_%' and
+yearly_saving  >=0 and total_working_hour >=0 and yearly_tax >=0 and monthly_expenses>=0
+)
+);
+
+
+insert into socio_economic_history values('SO01','10000','Businessman','8','15000','30000','married','P5002');
+insert into socio_economic_history values('SO02','20000','Businessman','9','5000','25000','married','P5004');
+insert into socio_economic_history values('SO03','11890000','Businessman','9','5000','33000','unmarried','P5007');
+insert into socio_economic_history values('SO04','9000','Businessman','9','5000','33000','married','P50011');
+

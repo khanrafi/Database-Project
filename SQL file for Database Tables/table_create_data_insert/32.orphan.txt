@@ -1,0 +1,20 @@
+create table Orphan
+(
+person_id      varchar2(35),
+
+fathers_date_of_death   date,
+mothers_date_of_death   date,
+
+fathers_cause_of_death   varchar2(20),
+mothers_cause_of_death   varchar2(20),
+families_looking_for_adoption  int,
+date_of_adoption               date,
+date_of_entry                  date,
+
+constraint orphan_pk primary key(person_id),
+constraint orphan_fk foreign key(person_id) references child(person_id) on delete cascade 
+);
+
+insert into Orphan values('P50012','06-10-2004','','Cancer','',3,'10-10-2010','05-01-2007');
+insert into Orphan values('P50013','05-05-2005','05-05-2005','Heart Attack','Accidenet',1,'','06-05-2010');
+insert into Orphan values('P5009','05-05-2005','05-05-2005','Accident','Accidenet',0,'','06-05-2012');
