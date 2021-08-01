@@ -1,2 +1,2 @@
 # Database-Project
-A System Towards Digitizing the Maternal Health and Children Support management in Developing Countries
+A Web Application for Digitizing the Maternal Health and Children Support management in Developing Countries
